@@ -40,6 +40,16 @@ public class Fraction {
         //test reduce method
         f8.reduce();
         f8.print();
+
+        //test the toString method
+        System.out.println(f1.toString());
+
+        //test the toDouble method
+        System.out.println(f8.toDouble());
+
+        //test negative
+        Fraction f10 = new Fraction(4, -12);
+        System.out.println(f10.toDouble());
     }
 
     //Fraction() - The default constructor, which sets the value of the fraction to 0/1. (Note, a constructor is similar to a method, but not actually a method.)
@@ -147,11 +157,24 @@ public class Fraction {
     }
 
     //String toString() - Returns a string representing this fraction. The string should have the format: "N/D", where N is the numerator, and D is the denominator. This method should always print the reduced form of the fraction. If the fraction is negative, the sign should be displayed on the numerator, e.g., "-1/2" not "1/-2". Note: once you implement this, you will be able to print a Fraction with println... more on how this works later
+    public String toString() {
+        String numeratorAsString = String.valueOf(_numerator);
+        String denominatorAsString = String.valueOf(_denominator);
+        String result = numeratorAsString + "/" + denominatorAsString;
 
+        return result;
+    }
 
 
     //double toDouble() - Returns a (double precision) floating point number that is the approximate value of this fraction, printed as a real number.
+    public double toDouble() {
+        double numeratorAsDouble = (double)_numerator;
+        double denominatorAsDouble = (double)_denominator;
 
+        double result = numeratorAsDouble / denominatorAsDouble;
+
+        return result;
+    }
 
 
     //print method for fraction
@@ -160,7 +183,7 @@ public class Fraction {
     }
 
     //reduce function
-    public void reduce() {
+    private void reduce() {
         //call the GCD and store that value in a variable
         long numeratorDividedByGCD = _numerator / this.GCD();
         long denominatorDividedByGCD = _denominator / this.GCD();
