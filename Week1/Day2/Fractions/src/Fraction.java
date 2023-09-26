@@ -6,50 +6,7 @@ public class Fraction {
 
 
     public static void main(String[] args) {
-        //creation of test fractions
-        Fraction f1 = new Fraction(3, 4);
-        Fraction f2 = new Fraction(1, 2);
-        Fraction f3 = new Fraction();
-        Fraction f4 = new Fraction();
-        Fraction f5 = new Fraction();
-        Fraction f6 = new Fraction();
-        Fraction f7 = new Fraction();
-        //for reduce
-        Fraction f8 = new Fraction(3,9);
 
-        //test fractionPlus method
-        f3 = f1.fractionPlus(f2);
-        f3.print();
-
-        //test fractionMinus method
-        f4 = f1.fractionMinus(f2);
-        f4.print();
-
-        //test fractionTimes method
-        f5 = f1.fractionTimes(f2);
-        f5.print();
-
-        //test fractionDividedBy method
-        f7 = f1.fractionDividedBy(f2);
-        f7.print();
-
-        //test fractionReciprocal method
-        f6 = f1.fractionReciprocal();
-        f6.print();
-
-        //test reduce method
-        f8.reduce();
-        f8.print();
-
-        //test the toString method
-        System.out.println(f1.toString());
-
-        //test the toDouble method
-        System.out.println(f8.toDouble());
-
-        //test negative
-        Fraction f10 = new Fraction(4, -12);
-        System.out.println(f10.toDouble());
     }
 
     //Fraction() - The default constructor, which sets the value of the fraction to 0/1. (Note, a constructor is similar to a method, but not actually a method.)
