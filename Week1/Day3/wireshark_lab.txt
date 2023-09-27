@@ -1,0 +1,60 @@
+Josh Barton - Snooping with Wireshark Lab
+
+What data is being sent to the other computer?
+
+- In the data section it's saying that there are 48 bytes of data. It is sending ASCII values I believe.
+
+
+What is the source address, the destination address?
+
+- Source address is 10.17.240.156
+- Destination address is 10.17.147.252
+
+How do the integer values compare with the ASCII that is displayed in the terminal? Does it match anything that we have seen before?
+
+- In the data section on Wireshark, it shows that 48 bytes of data are being sent. However, on the terminal it's saying that 64 bytes are being sent in a package. 
+- Information is being sent through bytes of data. 
+
+
+How long does it take a ping packet to travel to your classmate's machine and back?
+
+- It ranges anywhere from 7 ms to 115 ms.
+
+
+Try ping google.com . How long does it take these ping packets to travel?
+
+- It takes between 5 ms to 15 ms.
+
+
+Try ping www.louvre.fr. How long does this take?
+
+- It takes between 150 ms to 160 ms.
+
+
+What do these numbers tell you?
+
+- These numbers tell me that certain files and servers take more time to request information than others. There is variability in how long it takes for clients and servers to communicate with each other. 
+
+
+Step 3: 
+
+Did you see more than you expected in the output? Can you figure out what other data was sent/received?
+
+- Yes, I saw more than was expected in the output. I think the other data that was sent/received was the html files that display the webpage. 
+
+
+What is the purpose of the curl program? Now run curl example.com while Wireshark is recording.
+
+- The purpose of the curl program is to transfer data from or to a server.
+
+How are your results different / similar?
+
+- The results are similar in the way that they both are able to give you the contents of the html file. However, they are different in the way that the curl program just gives you the contents of the html file and nothing else. 
+
+Finally, try going to http://github.com using Safari or Firefox (not Chrome! It does its own weird thing), and see what happens. (What URL actually show's up when GitHub is loaded? It's not exactly what you typed in.) Can you understand the output from Wireshark? Why can you only read the first couple of messages?
+
+- I'm not seeing any URL, it says that there is an unseen segment. 
+- I think this output is basically saying we can't see the URLs. 
+- I think I can only read the first couple of messages because the site is a secure site. It's an HTTPS instead of an HTTP which means it's encrypted so we can only see what they want us to see. 
+
+
