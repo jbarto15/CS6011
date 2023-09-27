@@ -51,19 +51,19 @@ class FractionTest {
         Assertions.assertEquals( f3.toString(), "2/1" );
     }
 
-//    @Test
-//    void toString() {
-//        Fraction f1 = new Fraction(1,2 );
-//
-//        Assertions.assertEquals( f1.toString(), "1/2" );
-//    }
+    @Test
+    void testingToString() {
+        Fraction f1 = new Fraction(1,2 );
 
-//    @Test
-//    void toDouble() {
-//        Fraction f1 = new Fraction(1,2 );
-//
-//        Assertions.assertEquals( f1.toDouble(), "1/2" );
-//    }
+        Assertions.assertEquals( f1.toString(), "1/2" );
+    }
+
+    @Test
+    void toDouble() {
+        Fraction f1 = new Fraction(1,2 );
+
+        Assertions.assertEquals( f1.toDouble(), 0.5 );
+    }
     @Test
     void print() {
     }

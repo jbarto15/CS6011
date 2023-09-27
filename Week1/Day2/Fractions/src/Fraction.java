@@ -1,3 +1,5 @@
+// Josh Barton
+
 import javax.print.DocFlavor;
 
 public class Fraction {
@@ -114,6 +116,7 @@ public class Fraction {
     }
 
     //String toString() - Returns a string representing this fraction. The string should have the format: "N/D", where N is the numerator, and D is the denominator. This method should always print the reduced form of the fraction. If the fraction is negative, the sign should be displayed on the numerator, e.g., "-1/2" not "1/-2". Note: once you implement this, you will be able to print a Fraction with println... more on how this works later
+    @Override
     public String toString() {
         String numeratorAsString = String.valueOf(_numerator);
         String denominatorAsString = String.valueOf(_denominator);
