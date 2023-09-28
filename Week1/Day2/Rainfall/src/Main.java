@@ -10,7 +10,7 @@ public class Main {
         //create a variable called rainData that takes the name of the file
         RainData rainData = new RainData("/Users/joshbarton/Desktop/MSD2023/CS6011/Week1/Day2/Rainfall/src/rainfall_data.txt");
 
-        //create an array list of type RainData and use the dataList method to get an array list of all the rain data (month, year, rainfall)
+        //create an array list of type RainData and use the dataList method to get an ArrayList of all the rain data (month, year, rainfall)
         ArrayList<RainData> dataList = rainData.dataList();
 
         //variable to store the statistics for each month and the overall average rainfall for all months

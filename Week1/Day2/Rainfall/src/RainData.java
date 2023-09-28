@@ -42,7 +42,6 @@ public class RainData {
 
     //method that inputs the file and puts it into an array list of type RainData
     public ArrayList<RainData> dataList() throws FileNotFoundException {
-
         //read in the file
         FileInputStream fileInputStream = new FileInputStream(_filePath);
 
@@ -54,16 +53,16 @@ public class RainData {
 
         //read in the file as long as there is a line to read
         while (scanner.hasNextLine()) {
-            //Split the line using //s+ which will split the line up at each space
+            //split up the line using \\s+ which will split the line when it encounters a space
             String[] line = (scanner.nextLine()).split("\\s+");
 
-            //check to make sure the line we put into the data array has all the components, i.e. is greater than 1 since the line has should have 0,1,and 2 components
+            //check to make sure the line we put into the string array has all the components, i.e. is greater than 1 since the line has should have 0,1,and 2 components
             if (line.length > 1) {
                 String month = line[0];
                 Integer year = Integer.parseInt(line[1]);
                 Double rainfall = Double.parseDouble(line[2]);
 
-                //create a new object with the data received in the input
+                //create a new object with the data received from scanning in the file
                 RainData newData = new RainData(month, year, rainfall);
 
                 //add the new objects to the array list of type RainData
@@ -79,9 +78,9 @@ public class RainData {
         double totalRainfall = 0.0;
         double numOfMonths = 0;
 
-        //loop through the dataList
+        //loop through the dataList which is an array list of type RainData
         for (RainData data : dataList) {
-            //check to see if the month in the data list is equal to the month passed into the method. If so, updata total rainfall by adding the rainfall of that month
+            //check to see if the month in each data member of the arrayList is equal to the month passed into the method. If so, updata total rainfall by adding the rainfall of that month
             if (data.getMonth().equals(month)) {
                 totalRainfall += data.getRainfall();
                 //update the number of months so that we will have a number to divide by
