@@ -7,11 +7,11 @@ import java.text.DecimalFormat;
 public class Main {
     public static void main(String[] args) throws IOException {
 
-        //create a variable called rainData that takes the name of the file
-        RainData rainData = new RainData("/Users/joshbarton/Desktop/MSD2023/CS6011/Week1/Day2/Rainfall/src/rainfall_data.txt");
+        //create a variable called rainfallData that takes the name of the file
+        RainData rainfallData = new RainData("/Users/joshbarton/Desktop/MSD2023/CS6011/Week1/Day2/Rainfall/src/rainfall_data.txt");
 
         //create an array list of type RainData and use the dataList method to get an ArrayList of all the rain data (month, year, rainfall)
-        ArrayList<RainData> dataList = rainData.dataList();
+        ArrayList<RainData> dataList = rainfallData.dataList();
 
         //variable to store the statistics for each month and the overall average rainfall for all months
         String textToAddToFile = new String();
@@ -22,7 +22,7 @@ public class Main {
         //use a for loop from 0 to 11 since there are 12 months in a year and display the average rainfall for that month
         for (int i = 0; i < 12; i++ ) {
             String targetMonth = dataList.get(i).getMonth();
-            double averageRainfall = rainData.findAverageRainfall(dataList, targetMonth);
+            double averageRainfall = rainfallData.findAverageRainfall(dataList, targetMonth);
 
             //variable to change the averageRainfall into the proper format of two places after decimal
             DecimalFormat aveRain = new DecimalFormat("0.00");
@@ -52,6 +52,6 @@ public class Main {
         textToAddToFile += "The overall average rainfall amount is " + overallRainProperFormat + " inches." + '\n';
 
         //call the outputStatistics method to add the statistics to the file
-        rainData.outputStatistics("/Users/joshbarton/Desktop/MSD2023/CS6011/Week1/Day2/Rainfall/src/rainfall_results.txt", textToAddToFile);
+        rainfallData.outputStatistics("/Users/joshbarton/Desktop/MSD2023/CS6011/Week1/Day2/Rainfall/src/rainfall_results.txt", textToAddToFile);
     }
 }
