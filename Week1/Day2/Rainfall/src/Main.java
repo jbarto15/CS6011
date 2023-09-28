@@ -1,11 +1,8 @@
 //Josh Barton - Rainfall HW
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.lang.reflect.Array;
-import java.util.Scanner;
 import java.util.ArrayList;
+import java.text.DecimalFormat;
 
 public class Main {
     public static void main(String[] args) throws IOException {
@@ -26,15 +23,22 @@ public class Main {
         for (int i = 0; i < 12; i++ ) {
             String targetMonth = dataList.get(i).getMonth();
             double averageRainfall = rainData.findAverageRainfall(dataList, targetMonth);
-            System.out.println("The average rainfall amount for " + targetMonth + " is " + averageRainfall);
+            //variable to change the averageRainfall into the proper format of two places after decimal
+            DecimalFormat aveRain = new DecimalFormat("0.00");
+            String avRainProperFormat = aveRain.format(averageRainfall);
+            System.out.println("The average rainfall amount for " + targetMonth + " is " + avRainProperFormat);
             sumOfAverageRainfall += averageRainfall;
-            textToAddToFile += "The average rainfall amount for " + targetMonth + " is " + averageRainfall + '\n';
+            textToAddToFile += "The average rainfall amount for " + targetMonth + " is " + avRainProperFormat + '\n';
         }
 
         //get the overall average rainfall for all of the months
         double overallTotalRainfall = sumOfAverageRainfall / 12;
-        System.out.println("The overall average rainfall amount is " + overallTotalRainfall + " inches.");
-        textToAddToFile += "The overall average rainfall amount is " + overallTotalRainfall + " inches." + '\n';
+        //variable to change the overallTotalRainfall into the proper format of two places after decimal
+        DecimalFormat overallTotRain = new DecimalFormat("0.00");
+        String overallRainProperFormat = overallTotRain.format(overallTotalRainfall);
+        System.out.println("The overall average rainfall amount is " + overallRainProperFormat + " inches.");
+        //add text to the rainfall_results.txt file
+        textToAddToFile += "The overall average rainfall amount is " + overallRainProperFormat + " inches." + '\n';
 
         //call the outputStatistics method to add the statistics to the file
         rainData.outputStatistics("/Users/joshbarton/Desktop/MSD2023/CS6011/Week1/Day2/Rainfall/src/rainfall_results.txt", textToAddToFile);

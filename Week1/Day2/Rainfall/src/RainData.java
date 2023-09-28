@@ -1,6 +1,5 @@
 //Josh Barton - Rainfall Assignment
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.OutputStream;
 import java.io.FileNotFoundException;
@@ -90,7 +89,6 @@ public class RainData {
         //return the average for the specific month given
         return totalRainfall / numOfMonths;
     }
-
 
     //method that will add the averages for each month and the overall average to the text file
     public void outputStatistics(String filePath, String statisticsToAdd) throws IOException {
