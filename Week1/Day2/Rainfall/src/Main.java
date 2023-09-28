@@ -25,8 +25,8 @@ public class Main {
             double averageRainfall = rainfallData.findAverageRainfall(dataList, targetMonth);
 
             //variable to change the averageRainfall into the proper format of two places after decimal
-            DecimalFormat aveRain = new DecimalFormat("0.00");
-            String avRainProperFormat = aveRain.format(averageRainfall);
+            DecimalFormat avRain = new DecimalFormat("0.00");
+            String avRainProperFormat = avRain.format(averageRainfall);
 
             //print out the average rainfall for a particular month
             System.out.println("The average rainfall amount for " + targetMonth + " is " + avRainProperFormat);
