@@ -12,12 +12,14 @@ public class RainData {
     private String _month;
     private int _year;
     private Double _rainfall;
-    public String _filePath;
+    private String _filePath;
 
+    //a get month method that will be useful in determining the averages
     public String getMonth() {
         return _month;
     }
 
+    //a get rainfall method that will help in determining averages
     public double getRainfall() {
         return _rainfall;
     }
@@ -55,7 +57,7 @@ public class RainData {
             //Split the line using //s+ which will split the line up at each space
             String[] line = (scanner.nextLine()).split("\\s+");
 
-            //check to make sure the line we put into the data array has all the components, i.e. is greater than 1
+            //check to make sure the line we put into the data array has all the components, i.e. is greater than 1 since the line has should have 0,1,and 2 components
             if (line.length > 1) {
                 String month = line[0];
                 Integer year = Integer.parseInt(line[1]);
