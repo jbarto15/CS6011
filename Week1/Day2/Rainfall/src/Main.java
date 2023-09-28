@@ -28,13 +28,13 @@ public class Main {
             double averageRainfall = rainData.findAverageRainfall(dataList, targetMonth);
             System.out.println("The average rainfall amount for " + targetMonth + " is " + averageRainfall);
             sumOfAverageRainfall += averageRainfall;
-            textToAddToFile += "The average rainfall amount for " + targetMonth + " is " + averageRainfall;
+            textToAddToFile += "The average rainfall amount for " + targetMonth + " is " + averageRainfall + '\n';
         }
 
         //get the overall average rainfall for all of the months
         double overallTotalRainfall = sumOfAverageRainfall / 12;
         System.out.println("The overall average rainfall amount is " + overallTotalRainfall + " inches.");
-        textToAddToFile += "The overall average rainfall amount is " + overallTotalRainfall + " inches.";
+        textToAddToFile += "The overall average rainfall amount is " + overallTotalRainfall + " inches." + '\n';
 
         //call the outputStatistics method to add the statistics to the file
         rainData.outputStatistics("/Users/joshbarton/Desktop/MSD2023/CS6011/Week1/Day2/Rainfall/src/rainfall_results.txt", textToAddToFile);
