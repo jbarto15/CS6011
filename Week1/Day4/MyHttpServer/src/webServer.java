@@ -35,15 +35,19 @@ public class webServer {
 
                 //parse the client request into parts based on where there is a space and store it into an array of strings
                 String[] parts = clientRequest.split(" ");
+                //if the only a / is given from the client, assign that slash to /index.html
+                if (parts[1].equals("/")) {
+                    parts[1] = "/index.html";
+                }
 
                 //create a string variable that stores the path to the file that will be given to the client
                 String filePath = "/Users/joshbarton/Desktop/MSD2023/CS6011/Week1/Day4/MyHttpServer/resources" + parts[1];
                 //create a file variable that creates a new File type and takes the filePath as its parameter
                 File htmlFile = new File(filePath);
 
-
                 //create output stream variable that assigns the clients output stream to an OutputStream variable
                 OutputStream outputStream = client.getOutputStream();
+
 
                 //check to make sure the request is a GET request and that the requested file exists
                 if (parts[0].equals("GET") && htmlFile.exists()) {
