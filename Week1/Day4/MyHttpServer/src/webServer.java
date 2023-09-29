@@ -40,14 +40,15 @@ public class webServer {
                 String filePath = "/Users/joshbarton/Desktop/MSD2023/CS6011/Week1/Day4/MyHttpServer/resources" + parts[1];
                 //create a file variable that creates a new File type and takes the filePath as its parameter
                 File htmlFile = new File(filePath);
-                //create a filestream variable that streams in the html file
-                FileInputStream inputFile = new FileInputStream(htmlFile);
+
 
                 //create output stream variable that assigns the clients output stream to an OutputStream variable
                 OutputStream outputStream = client.getOutputStream();
 
                 //check to make sure the request is a GET request and that the requested file exists
                 if (parts[0].equals("GET") && htmlFile.exists()) {
+                        //create a filestream variable that streams in the html file
+                        FileInputStream inputFile = new FileInputStream(htmlFile);
                         //if file exists print out file found
                         System.out.println("File found");
                         //give the header information to the client
@@ -62,7 +63,8 @@ public class webServer {
 
                         //close the output stream
                         outputStream.close();
-                    } else {
+                    }
+                else if(parts[0].equals("GET") && !htmlFile.exists()){
                         //give the header information to the client and the file
                         outputStream.write("HTTP/1.1 404 Not Found".getBytes());
                         outputStream.write("Content-Type: text/html".getBytes());
