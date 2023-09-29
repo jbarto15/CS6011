@@ -43,30 +43,36 @@ public class webServer {
                     OutputStream outputStream = client.getOutputStream();
 
                     //check to make sure the request has all 3 parts of getting a request from client by creating individual variables for them
-                    if (parts[0].equals("GET") && parts[1].equals("/index.html") || parts[1].equals("/") && parts[2].equals( "HTTP/1.1")) {
+                    if (parts[0].equals("GET")) {
+                    //if (parts[0].equals("GET") && parts[1].equals(filePath) || parts[1].equals("/") && parts[2].equals( "HTTP/1.1")) {
                         //return to the client that the specific file is found
-                        System.out.println("File found");
-                        //give the header information to the client and the file
-                        outputStream.write("HTTP/1.1 200 OK\n".getBytes());
-                        outputStream.write("Content-Type: text/html\n".getBytes());
-                        outputStream.write("\n".getBytes());
-                        inputFile.transferTo(outputStream);
+                        if (htmlFile.exists()) {
+                            System.out.println("File found");
+                            //give the header information to the client and the file
+                            outputStream.write("HTTP/1.1 200 OK\n".getBytes());
+                            outputStream.write("Content-Type: text/html\n".getBytes());
+                            outputStream.write("\n".getBytes());
+                            inputFile.transferTo(outputStream);
 
-                        //flush the output stream
-                        outputStream.flush();
+                            //flush the output stream
+                            outputStream.flush();
 
-                        //close the output stream
-                        outputStream.close();
-
-                    } else {
+                            //close the output stream
+                            outputStream.close();
+                        }
+                    } else if (!htmlFile.exists()) {
                         //return the error that the file is not found
+                        //create a file variable that stores the path to the file that will be given to the client
+                        String errorFilePath = "/Users/joshbarton/Desktop/MSD2023/CS6011/Week1/Day4/MyHttpServer/resources/errorHtml.html";
+                        File errorHtmlFile = new File(errorFilePath);
+                        FileInputStream inputErrorFile = new FileInputStream(errorHtmlFile);
 
                         //give the header information to the client and the file
                         outputStream.write("HTTP/1.1 404 Not Found".getBytes());
                         outputStream.write("Content-Type: text/html".getBytes());
                         outputStream.write("\n".getBytes());
                         outputStream.write("404 Not Found".getBytes());
-                        inputFile.transferTo(outputStream);
+                        inputErrorFile.transferTo(outputStream);
 
                         //flush the output stream
                         outputStream.flush();
