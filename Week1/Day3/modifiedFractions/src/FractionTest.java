@@ -1,6 +1,9 @@
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.Collections;
+
 class FractionTest {
 
     @Test
@@ -70,6 +73,24 @@ class FractionTest {
 
     @Test
     void reduce() {
+
+    }
+
+    @Test
+    void sort() throws Exception {
+        ArrayList<Fraction> list = new ArrayList<Fraction>();
+        Fraction f1 = new Fraction(4,9 );
+        Fraction f2 = new Fraction( 1, 3 );
+        Fraction f3 = f1.fractionDividedBy( f2 );
+        list.add(f1);
+        list.add(f2);
+        list.add(f3);
+        System.out.println("Before: " + list);
+        Collections.sort(list);
+
+        System.out.println("After: " + list);
+
+        Assertions.assertEquals(list.toString(), "[1/3, 4/9, 4/3]");
 
     }
 }

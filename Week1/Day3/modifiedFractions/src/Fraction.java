@@ -1,8 +1,9 @@
 // Josh Barton
 
 import javax.print.DocFlavor;
+import java.util.Collections;
 
-public class Fraction {
+public class Fraction implements Comparable<Fraction> {
     long _numerator;
     long _denominator;
 
@@ -166,6 +167,17 @@ public class Fraction {
             gcd = temp;
         }
         return gcd;
+    }
+
+    @Override
+    public int compareTo(Fraction object) {
+        //The method returns 0 if the string is equal to the other string. A value less than 0 is returned if the string is less than the other string (less characters) and a value greater than 0 if the string is greater than the other string (more characters).
+        if (this.toDouble() < object.toDouble()) {
+            return -1;
+        } else if (object.toDouble() > this.toDouble()) {
+            return 1;
+        }
+        return 0;
     }
 }
 
