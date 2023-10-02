@@ -8,6 +8,8 @@
       <change beforePath="$PROJECT_DIR$/../../../Week1/Day2/Rainfall/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Week1/Day2/Rainfall/src/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../Week1/Day4/MyHttpServer/src/HTTPRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Week1/Day4/MyHttpServer/src/HTTPRequest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../Week1/Day4/MyHttpServer/src/webServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Week1/Day4/MyHttpServer/src/webServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/synthesizer/AudioClip.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/synthesizer/AudioClip.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,6 +20,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Class" />
+        <option value="JUnit5 Test Class" />
       </list>
     </option>
   </component>
@@ -36,9 +39,19 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
     "git-widget-placeholder": "main"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="com.example.synthesizer" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="HelloApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.example.synthesizer.HelloApplication" />
