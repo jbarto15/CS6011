@@ -12,11 +12,20 @@ public class Main {
 // This is the format that we're following, 44.1 KHz mono audio, 16 bits per sample.
         AudioFormat format16 = new AudioFormat( 44100, 16, 1, true, false );
 
-        AudioComponent gen = new SineWave(220); // Your code
-        AudioClip clip = gen.getClip();         // Your code
+        AudioComponent generate = new SineWave(220); // Your code
+        AudioComponent generate2 = new SineWave(440);
+        AudioComponent audioAdjust = new VolumeAdjuster(generate, 6);
+        AudioClip clip = generate.getClip();// Your code
+        AudioClip clip2 = generate2.getClip();
+        AudioClip clip3 = audioAdjust.getClip();
+        AudioComponent mix = new Mixer();
+        mix.connectInput(generate);
+        mix.connectInput(generate2);
+        mix.connectInput(audioAdjust);
+        AudioClip clip4 = mix.getClip();
 
 
-        c.open( format16, clip.getData(), 0, clip.getData().length ); // Reads data from our byte array to play it.
+        c.open( format16, clip4.getData(), 0, clip4.getData().length ); // Reads data from our byte array to play it.
 
         System.out.println( "About to play..." );
         c.start(); // Plays it.

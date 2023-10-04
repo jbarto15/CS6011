@@ -14,12 +14,12 @@ class AudioClipTest {
         AudioClip audioClip = new AudioClip();
         audioClip.setSample(1,32768);
         AudioClip audioClip1 = new AudioClip();
-        audioClip1.setSample(2,-32768);
+        audioClip1.setSample(2,-2);
 
 
 
         Assertions.assertEquals(32768, audioClip.getSample(1));
-        //Assertions.assertEquals(-32768, audioClip1.getSample(1));
+        Assertions.assertEquals(-2, audioClip1.getSample(1));
 
     }
 

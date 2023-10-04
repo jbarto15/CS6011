@@ -9,7 +9,7 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/synthesizer/AudioClip.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/synthesizer/AudioClip.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/synthesizer/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/synthesizer/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/synthesizer/SineWave.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/synthesizer/SineWave.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/com/example/synthesizer/AudioClipTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/example/synthesizer/AudioClipTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -21,8 +21,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="JUnit5 Test Class" />
-        <option value="Class" />
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
