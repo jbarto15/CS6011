@@ -4,32 +4,34 @@ import java.util.ArrayList;
 
 public class Mixer implements AudioComponent{
     //public member variable ArrayList of AudioClips
-    private ArrayList<AudioClip> mixer;
+    private ArrayList<AudioClip> inputClips;
 
-    //constructor
+    //constructor, creates the array list
     public Mixer() {
-        this.mixer = new ArrayList<>();
+        //assign a new array list to the inputClips member variable when the mixer object is created
+        this.inputClips = new ArrayList<>();
     }
     @Override
     public AudioClip getClip() {
-        //create new clip
+        //create new clip that will return the mixed clip
         AudioClip mixedClip = new AudioClip();
-        //for each loop - to loop through arraylist clips
-        for (AudioClip oneClip : mixer) {
-            //inner loop to loop through each index within each clip
+        //for each loop - to loop through arraylist of audio components
+        for (AudioClip singleClip : inputClips) {
+            //inner loop to loop through each sample within each clip
             for (int i = 0; i < AudioClip.totalSamples; i++) {
-                mixedClip.setSample(i, mixedClip.getSample(i) + oneClip.getSample(i));
+                //setting the mixedClip by adding together what's already in the mixed clip with the singleClip we're iterating through
+                mixedClip.setSample(i, mixedClip.getSample(i) + singleClip.getSample(i));
             }
 
         }
-        //add value from for each loop clip to outer clip
-        //use set sample to add value back to outer clip
+        //return the mixed clip
         return mixedClip;
     }
 
     @Override
     public boolean hasInput() {
-        if (this.mixer == null) {
+        //check to see if the array list called inputClips has anything inside of it, if it doesn't return false
+        if (this.inputClips == null) {
             return false;
         }
         return true;
@@ -37,10 +39,8 @@ public class Mixer implements AudioComponent{
 
     @Override
     public void connectInput(AudioComponent input) {
-        //take the input and use the getclip() method to get a clip
-        AudioClip inputClip = input.getClip();
         //add the inputClip to our ArrayList member variable
-        mixer.add(inputClip);
+        inputClips.add(input.getClip());
     }
 
 

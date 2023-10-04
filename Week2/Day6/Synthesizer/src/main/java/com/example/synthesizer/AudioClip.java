@@ -35,7 +35,7 @@ public class AudioClip {
         //use bitwise OR on b1 and b2 to get the actual sample
          int sample = upper | lower;
         //System.out.println("wholesample"+Integer.toString(sample,2));
-        return sample;
+        return (short) sample;
     }
 
     //set a specific sample in the array
@@ -50,7 +50,6 @@ public class AudioClip {
 
         byteArray[index * 2] = (byte) (sample & 0x00FF);
         //System.out.println("LSB at set"+Integer.toString((sample & 0x00FF),2));
-
     }
 
     //method that gets our array of bytes and returns it
