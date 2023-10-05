@@ -35,9 +35,14 @@ public class Main {
         audioAdjust.connectInput(mix);
         //create an audio clip of type mixer
         AudioClip clip4 = mix.getClip();
+        //create linear ramp audio component
+        AudioComponent ramp = new LinearRamp(50, 2000);
+        AudioComponent variableFrequency = new VFSineWave();
+        variableFrequency.connectInput(ramp);
+        AudioClip clip5 = variableFrequency.getClip();
 
 
-        c.open( format16, clip4.getData(), 0, clip4.getData().length ); // Reads data from our byte array to play it.
+        c.open( format16, clip5.getData(), 0, clip5.getData().length ); // Reads data from our byte array to play it.
 
         System.out.println( "About to play..." );
         c.start(); // Plays it.
