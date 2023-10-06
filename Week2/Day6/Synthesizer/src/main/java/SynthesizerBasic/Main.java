@@ -1,4 +1,4 @@
-package com.example.synthesizer;
+package SynthesizerBasic;
 import javax.sound.sampled.*;
 
 
@@ -16,13 +16,17 @@ public class Main {
         AudioComponent generate = new SineWave(440); // Your code
         AudioComponent generate2 = new SineWave(100);
         AudioComponent generate3 = new SineWave(660);
+
         //create a Volume adjuster object with a scale to change the volume by
         AudioComponent audioAdjust = new VolumeAdjuster(0.9f);
+
         //use the connect input method in audio adjust to connect the first generated sin wave
         audioAdjust.connectInput(generate);
+
         //create an audio clip of type sin wave
         AudioClip clip = generate.getClip();// Your code
         AudioClip clip2 = generate2.getClip();
+
         //create an audio clip of type volume adjuster
         AudioClip clip3 = audioAdjust.getClip();
         //create a type mixer audio component
@@ -42,7 +46,7 @@ public class Main {
         AudioClip clip5 = variableFrequency.getClip();
 
 
-        c.open( format16, clip5.getData(), 0, clip5.getData().length ); // Reads data from our byte array to play it.
+        c.open( format16, clip4.getData(), 0, clip4.getData().length ); // Reads data from our byte array to play it.
 
         System.out.println( "About to play..." );
         c.start(); // Plays it.

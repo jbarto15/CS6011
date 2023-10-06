@@ -5,8 +5,24 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="63cb3924-0e7c-4fcf-8bce-f5e7b79fd03a" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../../../Week1/Day3/Modified Fractions/Fractions.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/synthesizer/SynthesizerApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../Week1/Day2/Rainfall/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Week1/Day2/Rainfall/src/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/synthesizer/AudioClip.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SynthesizerBasic/AudioClip.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/synthesizer/AudioComponent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SynthesizerBasic/AudioComponent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/synthesizer/HelloApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/synthesizer/HelloController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/synthesizer/LinearRamp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SynthesizerBasic/LinearRamp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/synthesizer/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SynthesizerBasic/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/synthesizer/Mixer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SynthesizerBasic/Mixer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/synthesizer/SineWave.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SynthesizerBasic/SineWave.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/synthesizer/VFSineWave.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SynthesizerBasic/VFSineWave.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/synthesizer/VolumeAdjuster.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SynthesizerBasic/VolumeAdjuster.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/example/synthesizer/AudioClipTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/example/synthesizer/AudioClipTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,16 +49,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
+    "git-widget-placeholder": "main"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.example.synthesizer" />
+    </key>
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
     </key>
@@ -51,12 +71,12 @@
     </key>
   </component>
   <component name="RunManager">
-    <configuration name="HelloApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.example.synthesizer.HelloApplication" />
+    <configuration name="SynthesizerApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.example.synthesizer.SynthesizerApplication" />
       <module name="Synthesizer" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.example.synthesizer.*" />
+          <option name="PATTERN" value="SynthesizerBasic.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -66,7 +86,7 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.HelloApplication" />
+        <item itemvalue="Application.SynthesizerApplication" />
       </list>
     </recent_temporary>
   </component>

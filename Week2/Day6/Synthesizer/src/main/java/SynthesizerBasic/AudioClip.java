@@ -1,4 +1,4 @@
-package com.example.synthesizer;
+package SynthesizerBasic;
 
 import java.util.Arrays;
 

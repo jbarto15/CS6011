@@ -1,4 +1,4 @@
-package com.example.synthesizer;
+package SynthesizerBasic;
 
 public class VolumeAdjuster implements AudioComponent {
     //variable for the scale

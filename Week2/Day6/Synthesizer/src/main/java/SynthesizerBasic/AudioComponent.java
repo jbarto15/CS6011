@@ -1,4 +1,4 @@
-package com.example.synthesizer;
+package SynthesizerBasic;
 
 public interface AudioComponent {
     //AudioClip getClip() - return the current sound produced by this component

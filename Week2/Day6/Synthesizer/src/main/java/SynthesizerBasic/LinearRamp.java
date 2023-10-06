@@ -1,14 +1,19 @@
-package com.example.synthesizer;
+package SynthesizerBasic;
 
-public class SineWave implements AudioComponent {
-    //variable that will store the frequency
-    double frequency;
+public class LinearRamp implements  AudioComponent {
+    //member variable start
+    private float start;
 
-    //constructor, takes a frequency and assigns that frequency to our member variable
-    public SineWave(double freq) {
-        this.frequency = freq;
+    //member variable stop
+    private float stop;
+
+
+    //constructor, give a start and stop value
+    public LinearRamp(float start, float stop) {
+        //assign the parameter values to my class member variables
+        this.start = start;
+        this.stop = stop;
     }
-
     @Override
     public AudioClip getClip() {
         //create a new audioclip
@@ -18,7 +23,7 @@ public class SineWave implements AudioComponent {
         //for loop that goes through our total number of samples
         for (int i = 0; i < AudioClip.totalSamples; i++) {
             //fill the array with the formula given to us
-            result = (int) (Short.MAX_VALUE * Math.sin(2*Math.PI*frequency * i / 44100));
+            result = (int) (( start * ( AudioClip.totalSamples - i ) + stop * i ) / AudioClip.totalSamples);
             //call set sample from audio clip class
             clip.setSample(i, result);
         }

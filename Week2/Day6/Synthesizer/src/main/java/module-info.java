@@ -6,4 +6,6 @@ module com.example.synthesizer {
 
     opens com.example.synthesizer to javafx.fxml;
     exports com.example.synthesizer;
+    exports SynthesizerBasic;
+    opens SynthesizerBasic to javafx.fxml;
 }
