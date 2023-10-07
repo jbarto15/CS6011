@@ -2,13 +2,18 @@ package SynthesizerBasic;
 
 public class VolumeAdjuster implements AudioComponent {
     //variable for the scale
-    private float scale;
+    public float scale;
 
     //create an AudioComponent variable
     private AudioComponent inputAC;
 
     //constructor, sets the member variable called scale
     public VolumeAdjuster(float scale) {
+        this.scale = scale;
+    }
+
+    //method to set the scale
+    public void setScale(float scale) {
         this.scale = scale;
     }
 

@@ -5,24 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="63cb3924-0e7c-4fcf-8bce-f5e7b79fd03a" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../../../Week1/Day3/Modified Fractions/Fractions.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/synthesizer/SynthesizerApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../Week1/Day2/Rainfall/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Week1/Day2/Rainfall/src/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/synthesizer/AudioClip.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SynthesizerBasic/AudioClip.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/synthesizer/AudioComponent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SynthesizerBasic/AudioComponent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/synthesizer/HelloApplication.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/synthesizer/HelloController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/synthesizer/LinearRamp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SynthesizerBasic/LinearRamp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/synthesizer/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SynthesizerBasic/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/synthesizer/Mixer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SynthesizerBasic/Mixer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/synthesizer/SineWave.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SynthesizerBasic/SineWave.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/synthesizer/VFSineWave.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SynthesizerBasic/VFSineWave.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/synthesizer/VolumeAdjuster.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SynthesizerBasic/VolumeAdjuster.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/example/synthesizer/AudioClipTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/example/synthesizer/AudioClipTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/SynthesizerBasic/VolumeAdjuster.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SynthesizerBasic/VolumeAdjuster.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/synthesizer/AudioComponentWidget.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/synthesizer/AudioComponentWidget.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/synthesizer/AudioComponentWidgetBase.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/synthesizer/SynthesizerApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/synthesizer/SynthesizerApplication.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
