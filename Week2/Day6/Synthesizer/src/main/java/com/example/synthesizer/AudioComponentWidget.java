@@ -80,11 +80,15 @@ public class AudioComponentWidget extends Pane { //used to extend pane. Now it e
         leftside.getChildren().add(freqLabel);
         leftside.setOnMousePressed(e->getPosInformation(e));
         leftside.setOnMouseDragged(e->moveWidget(e));
+
+        //MOST LIKELY DONT NEED ANYMORE
         //create a slider, set the event to a mouse dragged
-        Slider freqSlider = new Slider(200, 880, 400);
-        leftside.getChildren().add(freqSlider);
-        freqSlider.setOnMouseDragged(e -> setFrequency(e, freqSlider)); //add freqLabel after freqSlider
+//        Slider freqSlider = new Slider(200, 880, 400);
+//        leftside.getChildren().add(freqSlider);
+//        freqSlider.setOnMouseDragged(e -> setFrequency(e, freqSlider)); //add freqLabel after freqSlider
         //add the slider and the right side components to the widget
+
+
         widgetLayout.getChildren().add(leftside);
         widgetLayout.getChildren().add(rightSide);
 
@@ -147,7 +151,7 @@ public class AudioComponentWidget extends Pane { //used to extend pane. Now it e
 
 
     //method that sets the frequency, responds to the event of a mouse
-    private void setFrequency(MouseEvent e, Slider freqSlider) {
+    protected void setFrequency(MouseEvent e, Slider freqSlider) {
         //cast sine wave to the component so it knows that our component is of type sine wave, use the set frequency method
         //in our sin wave class to set the frequency to our parameter freqSlider
         ((SineWave)component_).setFrequency((freqSlider.getValue()));
@@ -169,14 +173,14 @@ public class AudioComponentWidget extends Pane { //used to extend pane. Now it e
 
     //NOTE FROM CLASS
     //need a method to move the widget
-    private void moveWidget(MouseEvent e) {
+    protected void moveWidget(MouseEvent e) {
         double deltaX = e.getSceneX() - mouseXPos;
         double deltaY = e.getSceneY() - mouseYPos;
 
         this.relocate(deltaX + widgetXPos, deltaY + widgetYPos);
     }
     //need a method to get the position information of the widget
-    private void getPosInformation(MouseEvent e) {
+    protected void getPosInformation(MouseEvent e) {
         mouseXPos = e.getSceneX();
         mouseYPos = e.getSceneY();
         widgetXPos = this.getLayoutX();

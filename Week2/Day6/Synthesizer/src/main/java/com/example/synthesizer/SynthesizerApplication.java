@@ -143,10 +143,8 @@ public class SynthesizerApplication extends Application {
     private void createAudioAdjusterComponent(ActionEvent e) {
         //create a new sine wave
         AudioComponent sinewave = new SineWave(200);
-        //create slider for the volume adjuster
-        Slider audioSlider = new Slider(1, 10, 5);
         //create a new widget
-        VolumeAdjusterWidget widget = new VolumeAdjusterWidget(sinewave, centerPanel,"Volume Adjuster", audioSlider);
+        VolumeAdjusterWidget widget = new VolumeAdjusterWidget(sinewave, centerPanel,"Volume Adjuster");
         //add the widget to the center panel
         centerPanel.getChildren().add(widget);
         //add the widget to the array list of widgets
