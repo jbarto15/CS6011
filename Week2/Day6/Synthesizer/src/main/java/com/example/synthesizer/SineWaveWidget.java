@@ -13,6 +13,8 @@ public class SineWaveWidget extends AudioComponentWidget {
         Slider freqSlider = new Slider(200, 880, 400);
         leftside.getChildren().add(freqSlider);
         freqSlider.setOnMouseDragged(e -> setFrequency(e, freqSlider)); //add freqLabel after freqSlider
+        int value = (int) freqSlider.getValue();
+        freqLabel.setText(label + " " + value + " Hz");
 
     }
     }

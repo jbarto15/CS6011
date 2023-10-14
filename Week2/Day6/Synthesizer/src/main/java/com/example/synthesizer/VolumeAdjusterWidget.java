@@ -10,6 +10,7 @@ import javafx.scene.shape.Circle;
 
 public class VolumeAdjusterWidget extends AudioComponentWidget {
     Slider widgetSlider_;
+
     public VolumeAdjusterWidget(AudioComponent component, AnchorPane parent, String label) {
         super(component, parent, label);
 
@@ -29,6 +30,11 @@ public class VolumeAdjusterWidget extends AudioComponentWidget {
 //        inputToVolAdjuster.setOnMousePressed(e->startConnection(e, inputToVolAdjuster));
 //        inputToVolAdjuster.setOnMouseDragged(e->moveConnection(e, inputToVolAdjuster));
 //        inputToVolAdjuster.setOnMouseReleased(e->endConnection(e, inputToVolAdjuster));
+
+
+        //set the position of the widget
+        this.setLayoutX(200);
+        this.setLayoutY(200);
     }
 
     //method to set the scale for the volume adjuster

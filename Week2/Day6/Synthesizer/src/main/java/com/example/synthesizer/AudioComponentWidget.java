@@ -25,6 +25,8 @@ public class AudioComponentWidget extends Pane { //used to extend pane. Now it e
     //member variable that stores the anchor pane
     public AnchorPane parent_;
     public String label_;
+    //make frequency label public
+    Label freqLabel;
 
     //member variable for the sliders
     Slider widgetSlider_;
@@ -76,7 +78,7 @@ public class AudioComponentWidget extends Pane { //used to extend pane. Now it e
 
         //LeftSide
         leftside = new VBox();
-        Label freqLabel = new Label(label);
+        freqLabel = new Label(label);
         leftside.getChildren().add(freqLabel);
         leftside.setOnMousePressed(e->getPosInformation(e));
         leftside.setOnMouseDragged(e->moveWidget(e));

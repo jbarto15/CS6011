@@ -171,16 +171,16 @@ public class SynthesizerApplication extends Application {
         try {
             Clip c = AudioSystem.getClip();
             AudioFormat format16 = new AudioFormat(44100, 16, 1, true, false);
-//            Mixer mixer = new Mixer();
-//            for (AudioComponentWidget singleWidget: widgets) {
-//                AudioComponent component = singleWidget.component_;
-//                mixer.connectInput(component);
-            AudioClip clip = widgets.get(0).component_.getClip();
-            byte[] data = widgets.get(0).component_.getClip().getData();
-            //c.open(format16, clip.getData, 0, clip.getData.length);
-            c.open(format16, data, 0, data.length);
+            Mixer mixer = new Mixer();
+            for (AudioComponentWidget singleWidget: widgets) {
+                AudioComponent component = singleWidget.component_;
+                mixer.connectInput(component);
+            }
+            AudioClip clip = mixer.getClip();
+            //byte[] data = widgets.get(0).component_.getClip().getData();
+            //c.open(format16, data, 0, data.length);
+            c.open(format16, clip.getData(), 0, clip.getData().length);
             c.start();
-
             AudioListener listener = new AudioListener(c);
             c.addLineListener(listener);
         } catch (LineUnavailableException k) {
