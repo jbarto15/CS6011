@@ -17,6 +17,9 @@ let skierImage = new Image();
 //set the source of the skier image
 skierImage.src = "images/skier.jpeg";
 
+//create a background for the canvas
+
+
 //create an empty array that will hold skier images so the skiers can chase the fresh pow
 let skierArray = [];
 
@@ -24,6 +27,7 @@ let skierArray = [];
 for (let i = 0; i < 10; i++) {
     skierArray.push(skierImage);
 }
+
 
 //variables for the inital image position and size
 //set intital x position of snowflake image
@@ -40,6 +44,11 @@ window.onload = function() {
 
     //draw the image on the canvas using the drawImage method, pass the snowflake image as a parameter
     drawImage(snowflakeImage);
+
+    //add the skiers to the canvas
+    for (let i = 0; i < skierArray.length; i++) {
+    drawImage(skierImage);
+    }
 };
 
 //define a function to handle the snowflake image position when the mouse is moving, takes an event as a parameter
