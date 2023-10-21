@@ -36,7 +36,12 @@ for (let i = 0; i < 4; i++) {
 let background = new Image();
 background.src = "images/skiscene.png";
 
+//gameover image
+let gameOverBackground = new Image();
+gameOverBackground.src = "images/gameOver.jpg";
 
+
+//function that generates a skier and pushes that skier into an array
 function generateSkier() {
     //create a image object for skier image
     let skier = new Image();
@@ -49,6 +54,9 @@ function generateSkier() {
     skierArray.push(skier);
 }
 
+//variable to store whether or not game is over
+let isGameOver = true;
+
 //create an animate function
 function animate() {
     //function that will erase everything on the canvas
@@ -58,12 +66,7 @@ function animate() {
     //draw the skiers
     for (let i = 0; i < skierArray.length; i++) {
         context.drawImage(skierArray[i], skierArray[i].xPos, skierArray[i].yPos, skierArray[i].width, skierArray[i].height);
-        // updateSkierXandYValues();
-        //conditions that check the movement of the images
-        // if (moving) {
-        //     skierArray[i].xPos += Math.floor(Math.random() * (8 - 3) + 3);
-        //     skierArray[i].yPos += Math.floor(Math.random() * (8 - 3) + 3);
-        // }
+        //update the skier x and y values so that it follows the mouse
         moveSkier(skierArray[i], snowflake);
         checkCollision(skierArray[i]);
     }
@@ -95,18 +98,28 @@ function checkCollision(skier) {
     let distX = snowflake.xPos - skier.xPos;
     let distY = snowflake.yPos - skier.yPos;
 
-    //check if the distance is less than 10, if so, call the restart function
+    //check if the distance is less than 10, if so, call the gameOver function
     if (distX < 10 && distY < 10) {
-        //gameOver(snowflake);
+        gameOver();
     }
 }
 
+
+//function to restart the game if a collision has occured
+function gameOver() { //there's problems with this function
+    //draw a new background that says game over
+    context.fillStyle = "#FFFFFF";
+    context.fillRect(0, 0, canvasWidth, canvasHeight);
+    context.drawImage(gameOverBackground, 0, 0, canvasWidth, canvasHeight);
+}
 
 //function to move the skiers closer to the mouse
 function moveSkier(skier, snowflake) {
     //speed variable
     let speed = Math.floor(Math.random() * (6 - 2) + 2);;
 
+    //checks to see if the snowflake and skier are not in the same position, it then moves the skier accordingly so that it
+    //is closer to the snowflake
     if (snowflake.xPos < skier.xPos) {
         skier.xPos -= speed;
     }
@@ -122,19 +135,6 @@ function moveSkier(skier, snowflake) {
     if (snowflake.yPos > skier.yPos) {
         skier.yPos += speed;
     }
-
-}
-
-
-//function to restart the game if a collision has occured
-function gameOver(snowflake) { //there's problems with this function
-    //draw a new background that says you've lost and refresh the screen to restart
-    // context.fillStyle="#FFFFFF";
-    // context.fillRect(0, 0, canvasWidth, canvasHeight);
-
-    //reset the snowflake position
-    snowflake.xPos = canvasWidth / 2;
-    snowflake.yPos = canvasHeight / 2;
 }
 
 
