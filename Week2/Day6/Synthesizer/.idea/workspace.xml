@@ -7,12 +7,14 @@
     <list default="true" id="63cb3924-0e7c-4fcf-8bce-f5e7b79fd03a" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/../../../Week1/Day2/Rainfall/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Week1/Day2/Rainfall/src/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/SynthesizerBasic/AudioComponent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/SynthesizerBasic/AudioComponent.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/synthesizer/AudioComponentWidget.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/synthesizer/AudioComponentWidget.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/synthesizer/Cable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/synthesizer/Cable.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/synthesizer/MixerWidget.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/synthesizer/MixerWidget.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/synthesizer/SineWaveWidget.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/synthesizer/SineWaveWidget.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/synthesizer/SynthesizerApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/synthesizer/SynthesizerApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/synthesizer/VolumeAdjusterWidget.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/synthesizer/VolumeAdjusterWidget.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Week3/Day12/Sorting/sorting.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Week3/Day12/Sorting/sorting.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Week3/Day12/Sorting/sorting.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Week3/Day12/Sorting/sorting.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

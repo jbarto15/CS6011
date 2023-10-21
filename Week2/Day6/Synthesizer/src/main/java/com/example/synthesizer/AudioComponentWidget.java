@@ -4,6 +4,7 @@ import SynthesizerBasic.AudioComponent;
 import SynthesizerBasic.SineWave;
 import SynthesizerBasic.VolumeAdjuster;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.geometry.Bounds;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -20,7 +21,7 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 
 public class AudioComponentWidget extends Pane { //used to extend pane. Now it extends AudioComponentWidgetBase because we made a super class that will create all widgets
-    //member variable that stores an audio component
+    //member variable for the audiocomponent
     public AudioComponent component_;
     //member variable that stores the anchor pane
     public AnchorPane parent_;
@@ -34,16 +35,18 @@ public class AudioComponentWidget extends Pane { //used to extend pane. Now it e
     //slider values
     double sliderValues_;
 
-    //NOTE FROM CLASS
+    //variables for the positions that will be used in the move method
     public double mouseXPos, mouseYPos, widgetXPos, widgetYPos;
-    Line line_;
+    //variable that will store the line being drawn
+    public static Line line_;
 
 
-
+    //vertical box for the leftside of the widget
     VBox leftside;
+
     //constructor, takes an audio component, and a parent anchor pane
-    public AudioComponentWidget(AudioComponent component, AnchorPane parent, String label) { //, Slider widgetSlider, double sliderValues
-        //assign member variables to the parameter
+    public AudioComponentWidget(AudioComponent component, AnchorPane parent, String label) {  //Slider widgetSlider, double sliderValues
+        //assign member variables to the parameters
         component_ = component;
         parent_ = parent;
         label_ = label;
@@ -61,11 +64,10 @@ public class AudioComponentWidget extends Pane { //used to extend pane. Now it e
         output.setFill(Color.AQUA);
 
 
-        //NOTE FROM CLASS
         //handle drawing the line - handle 3 events
-        output.setOnMousePressed(e->startConnection(e, output));
-        output.setOnMouseDragged(e->moveConnection(e, output));
-        output.setOnMouseReleased(e->endConnection(e, output));
+        output.setOnMousePressed(e -> startConnection(e, output));
+        output.setOnMouseDragged(e -> moveConnection(e, output));
+        output.setOnMouseReleased(e -> endConnection(e, output));
 
         //add the close button, and circle to the vertical box
         rightSide.getChildren().add(closeButton);
@@ -80,20 +82,11 @@ public class AudioComponentWidget extends Pane { //used to extend pane. Now it e
         leftside = new VBox();
         freqLabel = new Label(label);
         leftside.getChildren().add(freqLabel);
-        leftside.setOnMousePressed(e->getPosInformation(e));
-        leftside.setOnMouseDragged(e->moveWidget(e));
-
-        //MOST LIKELY DONT NEED ANYMORE
-        //create a slider, set the event to a mouse dragged
-//        Slider freqSlider = new Slider(200, 880, 400);
-//        leftside.getChildren().add(freqSlider);
-//        freqSlider.setOnMouseDragged(e -> setFrequency(e, freqSlider)); //add freqLabel after freqSlider
-        //add the slider and the right side components to the widget
-
+        leftside.setOnMousePressed(e -> getPosInformation(e));
+        leftside.setOnMouseDragged(e -> moveWidget(e));
 
         widgetLayout.getChildren().add(leftside);
         widgetLayout.getChildren().add(rightSide);
-
 
         //add the widget layout
         this.getChildren().add(widgetLayout);
@@ -104,59 +97,66 @@ public class AudioComponentWidget extends Pane { //used to extend pane. Now it e
     }
 
 
-    //NOTE FROM CLASS
+    //Methods that will handle the connections between widgets and with the speaker
     private void endConnection(MouseEvent e, Circle output) {
+        //get the speaker from the main window
         Circle speaker = SynthesizerApplication.speaker;
+        //create the bounds for the speaker
         Bounds speakerBounds = speaker.localToScene(speaker.getBoundsInLocal());
 
+        //calculate the distance between the line and the speaker so that they can connect
         double distance = Math.sqrt(Math.pow(speakerBounds.getCenterX() - e.getSceneX(), 2.0 * Math.pow(speakerBounds.getCenterY() - e.getSceneY(), 2.0)));
-        if (distance < 10) {
-            //the wave to some array list
-            SynthesizerApplication.widgets.add(this); //that will add the connected to the other opened //nabil changed this widgets name to ConnectedWidgets
-            //better to create a new array list for connected widgets only
-
-            //the wave to some array list
+        //if the distance between the line and the speaker is less than 10 we want to add the widget to add the connected widget to a new array list of connected widgets
+        if (distance < 25) {
+            //add the wave to the connectedWidgets array list and not just the number of audio component widgets on the screen. We only want the connected widgets to play sound
+            SynthesizerApplication.connectedWidgets.add(this);
         } else {
+            //if the line and the speaker are not less than 10 pixels away from each other, remove the line
             parent_.getChildren().remove(line_);
+            //set the line to null to make sure it is not pointing
             line_ = null;
         }
     }
 
     private void moveConnection(MouseEvent e, Circle output) {
+        //create the bounds for the parent
         Bounds parentBounds = parent_.getBoundsInParent();
+        //set the end of the line
         line_.setEndX(e.getSceneX() - parentBounds.getMinX());
         line_.setEndY(e.getSceneY() - parentBounds.getMinY());
 
     }
 
     private void startConnection(MouseEvent e, Circle output) {
+        //check to see if the line is not null, and if it is not, remove the line
         if (line_ != null) {
             parent_.getChildren().remove(line_);
         }
-
+        //get the bounds of the parent and output
         Bounds parentBounds = parent_.getBoundsInParent();
         Bounds bounds = output.localToScene(output.getBoundsInLocal());
 
+        //create a new line and set the stroke width, we made this a global variable in the class so that it could be used by all the connection methods
         line_ = new Line();
         line_.setStrokeWidth(5);
 
+        //set the starting point of the line to the current widget subtracted by the parent minimum X and Y position
         line_.setStartX(bounds.getCenterX() - parentBounds.getMinX());
         line_.setStartY(bounds.getCenterY() - parentBounds.getMinY());
 
+        //set the end point of where the line should be drawn
         line_.setEndX((e.getSceneX()));
         line_.setEndY(e.getSceneY());
 
+        //add the line to the parent which is our center anchor pain
         parent_.getChildren().add(line_);
-
-
     }
-
 
     //method that sets the frequency, responds to the event of a mouse
     protected void setFrequency(MouseEvent e, Slider freqSlider) {
         //cast sine wave to the component so it knows that our component is of type sine wave, use the set frequency method
         //in our sin wave class to set the frequency to our parameter freqSlider
-        ((SineWave)component_).setFrequency((freqSlider.getValue()));
+        ((SineWave) component_).setFrequency((freqSlider.getValue()));
 
         //need to add left side stuff above to this method
     }
@@ -164,25 +164,28 @@ public class AudioComponentWidget extends Pane { //used to extend pane. Now it e
 
     //method that closes the widget when an action event occurs which is when the X is pressed on the widget
     private void closeWidget(ActionEvent e) {
+        //to close the widget we need to remove the widget from the parent (center anchor pane) and then remove the widget from the array list of widgets
         parent_.getChildren().remove(this);
         SynthesizerApplication.widgets.remove(this);
 
-        //NOTE FROM CLASS
-        SynthesizerApplication.widgets.remove(this);
+        //remove the connected widget and the line that is connected when we close the widget
         SynthesizerApplication.connectedWidgets.remove(this);
         parent_.getChildren().remove(line_);
     }
 
-    //NOTE FROM CLASS
-    //need a method to move the widget
+    //method to move the widget
     protected void moveWidget(MouseEvent e) {
+        //variables to store the change in x and y position as the widget is getting moved around
         double deltaX = e.getSceneX() - mouseXPos;
         double deltaY = e.getSceneY() - mouseYPos;
 
+        //relocate the widget based on the change in position done by the mouse
         this.relocate(deltaX + widgetXPos, deltaY + widgetYPos);
     }
-    //need a method to get the position information of the widget
+
+    //method to get the position information of the widget
     protected void getPosInformation(MouseEvent e) {
+        //store the position of the mouse x and y and the widget x and y
         mouseXPos = e.getSceneX();
         mouseYPos = e.getSceneY();
         widgetXPos = this.getLayoutX();

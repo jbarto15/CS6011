@@ -26,7 +26,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class SynthesizerApplication extends Application {
-    //make center panel as a member variable so it is visible to the start method
+    //make center panel as a member variable, so it is visible to the start method
     public AnchorPane centerPanel = new AnchorPane();
 
     //array list of audio component widgets that will store each widget we create
@@ -34,7 +34,8 @@ public class SynthesizerApplication extends Application {
 
     //array list for all the component widgets that are connected
     public static ArrayList<AudioComponentWidget> connectedWidgets = new ArrayList<>();
-    //NOTE FROM CLASS
+
+    //object for the speaker
     public static Circle speaker;
 
     @Override
@@ -51,6 +52,8 @@ public class SynthesizerApplication extends Application {
         topPanel.setPadding(new Insets(30));
         Label nameOfProgram = new Label("Synthesizer");
         topPanel.getChildren().add(nameOfProgram);
+        nameOfProgram.setAlignment(Pos.TOP_CENTER);
+
 
         //CENTER PANEL
         //use the anchor pane member variable and make a circle that will represent the speaker
@@ -109,20 +112,6 @@ public class SynthesizerApplication extends Application {
         stage.setTitle("Synthesizer");
         stage.setScene(scene);
         stage.show();
-
-    }
-
-    //component method that creates a sine wave, a widget and adds them to the center panel
-    private void createComponent(ActionEvent e) {
-        //create a new sine wave
-        AudioComponent sinewave = new SineWave(200);
-        //create a new widget
-        AudioComponentWidget widget = new AudioComponentWidget(sinewave, centerPanel,"Sine Wave");
-        //add the widget to the center panel
-        centerPanel.getChildren().add(widget);
-        //add the widget to the array list of widgets
-        widgets.add(widget);
-
     }
 
     //component method that creates a sine wave, a widget and adds them to the center panel
@@ -172,7 +161,7 @@ public class SynthesizerApplication extends Application {
             Clip c = AudioSystem.getClip();
             AudioFormat format16 = new AudioFormat(44100, 16, 1, true, false);
             Mixer mixer = new Mixer();
-            for (AudioComponentWidget singleWidget: widgets) {
+            for (AudioComponentWidget singleWidget: connectedWidgets) {
                 AudioComponent component = singleWidget.component_;
                 mixer.connectInput(component);
             }
