@@ -54,9 +54,6 @@ function generateSkier() {
     skierArray.push(skier);
 }
 
-//variable to store whether or not game is over
-let isGameOver = true;
-
 //create an animate function
 function animate() {
     //function that will erase everything on the canvas
