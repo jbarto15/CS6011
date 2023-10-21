@@ -28,7 +28,7 @@ snowflake.height = 50;
 
 //create an array of skier images using the generate skier function
 let skierArray = [];
-for (let i = 0; i < 10; i++) {
+for (let i = 0; i < 4; i++) {
     generateSkier();
 }
 
@@ -49,9 +49,6 @@ function generateSkier() {
     skierArray.push(skier);
 }
 
-//moving variable to detect image movement
-let moving = true;
-
 //create an animate function
 function animate() {
     //function that will erase everything on the canvas
@@ -67,7 +64,7 @@ function animate() {
         //     skierArray[i].xPos += Math.floor(Math.random() * (8 - 3) + 3);
         //     skierArray[i].yPos += Math.floor(Math.random() * (8 - 3) + 3);
         // }
-        moveSkier(snowflake, skierArray[i]);
+        moveSkier(skierArray[i], snowflake);
         checkCollision(skierArray[i]);
     }
 
@@ -99,28 +96,31 @@ function checkCollision(skier) {
     let distY = snowflake.yPos - skier.yPos;
 
     //check if the distance is less than 10, if so, call the restart function
-    if (distX < 200 && distY < 200) {
-        gameOver(snowflake);
+    if (distX < 10 && distY < 10) {
+        //gameOver(snowflake);
     }
 }
 
 
 //function to move the skiers closer to the mouse
 function moveSkier(skier, snowflake) {
-    if (snowflake.xPos > skier.xPos) {
-        skier.xPos -= 5;
-    }
-
-    if (snowflake.yPos > skier.yPos) {
-        skier.yPos -= 5;
-    }
+    //speed variable
+    let speed = Math.floor(Math.random() * (6 - 2) + 2);;
 
     if (snowflake.xPos < skier.xPos) {
-        skier.xPos += 5;
+        skier.xPos -= speed;
     }
 
     if (snowflake.yPos < skier.yPos) {
-        skier.yPos += 5;
+        skier.yPos -= speed;
+    }
+
+    if (snowflake.xPos > skier.xPos) {
+        skier.xPos += speed;
+    }
+
+    if (snowflake.yPos > skier.yPos) {
+        skier.yPos += speed;
     }
 
 }
