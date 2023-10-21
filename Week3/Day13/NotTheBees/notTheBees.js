@@ -18,7 +18,7 @@ let canvasHeight = canvas.height;
 //create an image object for the snowflake image
 let snowflake = new Image();
 //set the source of the snowflake image
-snowflake.src = "images/snowflake.jpg";
+snowflake.src = "images/snowflake.png";
 //set the x and y position of the snowflake
 snowflake.xPos = (canvasWidth / 2);
 snowflake.yPos = (canvasHeight / 2);
