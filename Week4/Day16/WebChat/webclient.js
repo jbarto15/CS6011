@@ -11,43 +11,56 @@ let peopleInRoom = document.getElementById("peopleInRoom");
 //get the div section for "message center"
 let messageCenter = document.getElementById("messageCenter");
 
+
 //get the join button
 let joinButton = document.getElementById("join");
 joinButton.onclick = function (event) {
-    let username = usernameInput.value;
+    let roomNameValid = true;
     let room = roomInput.value;
-    //if the websocket is open, send the username and room to the server
+    for (let i = 0; i < room.length; i++) {
+        if (room[i] < 'a' || room[i] > 'z') {
+            roomNameValid = false;
+        }
+    }
+
+    if (!roomNameValid)
+        alert("Room must be all lowercase letter.");
+
+
+    if (roomNameValid) {
+        let username = usernameInput.value;
+        //if the websocket is open, send the username and room to the server
+        if (wsOpen) {
+            //send username and room
+            ws.send("join " + username + " " + room);
+        } else {
+            message.value = "Could not open the websocket!";
+        }
+    }
+}
+
+//get the send button 
+let sendButton = document.getElementById("sendButton");
+sendButton.onclick = function (event) {
+    let message = messageInput.value;
+    //if the websocket is open, send the message to the server
     if (wsOpen) {
-        //send username and room
-        ws.send("join " + username + " " + room);
+        ws.send("message " + message);
 
     } else {
         message.value = "Could not open the websocket!";
     }
 }
 
-//get the send button 
-let sendButton = document.getElementById("sendButton");
-sendButton.onclick = function(event) {
-        let message = messageInput.value;
-        //if the websocket is open, send the message to the server
-        if (wsOpen) {
-            ws.send("message " + message);
-
-        } else {
-            message.value = "Could not open the websocket!";
-        }
-    }
-
 //get the leave button
 let leaveButton = document.getElementById("leaveButton");
-leaveButton.onclick = function(event) {
-        //if the websocket is open, send the message to the server
-        if (wsOpen) {
-            ws.send("leave");
-        } else {
-            message.value = "Could not open the websocket!";
-        }
+leaveButton.onclick = function (event) {
+    //if the websocket is open, send the message to the server
+    if (wsOpen) {
+        ws.send("leave");
+    } else {
+        message.value = "Could not open the websocket!";
+    }
 }
 
 
@@ -64,14 +77,30 @@ ws.onmessage = handleMessage;
 //function that gets the username and room and stores them in variables, then sends the information to the server
 function handleUserNameAndRoom(event) {
     if (event.code == "Enter") {
-        let username = usernameInput.value;
+        let roomNameValid = true;
         let room = roomInput.value;
-        //if the websocket is open, send the username and room to the server
-        if (wsOpen) {
-            //send username and room
-            ws.send("join " + username + " " + room);
-        } else {
-            message.value = "Could not open the websocket!";
+
+        for (let i = 0; i < room.length; i++) {
+            console.log(room[i]);
+            if (room[i] < 'a' || room[i] > 'z') {
+                roomNameValid = false;
+            }
+        }
+
+        if (!roomNameValid) {
+            alert("Room must be all lowercase letter.");
+        }
+
+
+        if (roomNameValid) {
+            let username = usernameInput.value;
+            //if the websocket is open, send the username and room to the server
+            if (wsOpen) {
+                //send username and room
+                ws.send("join " + username + " " + room);
+            } else {
+                message.value = "Could not open the websocket!";
+            }
         }
     }
 }
@@ -134,22 +163,21 @@ function handleMessage(event) {
 
 
     if (object.type == "join") {
-    //add the user to the division "People in Room"
-    addToRoom.innerHTML = user + " has joined the room: " + room;
-    //add the paragraph to the "People in Room divison"
-    peopleInRoom.appendChild(addToRoom);
+        //add the user to the division "People in Room"
+        addToRoom.innerHTML = user + " has joined the room: " + room;
+        //add the paragraph to the "People in Room divison"
+        peopleInRoom.appendChild(addToRoom);
     }
 
     if (object.type == "message" && object.user !== "null") {
-    //add the message to the division "message center"
-    addToMessageCenter.innerHTML = user + ": " + message;
-    messageCenter.appendChild(addToMessageCenter);
+        //add the message to the division "message center"
+        addToMessageCenter.innerHTML = user + ": " + message;
+        messageCenter.appendChild(addToMessageCenter);
     }
 
     if (object.type == "leave") {
-        ws.send(user + " left the room.");
         let leaveMessage = document.createElement("p");
         leaveMessage.innerHTML = user + " left the room."
-        addToRoom.appendChild(leaveMessage);
+        peopleInRoom.appendChild(leaveMessage);
     }
 }
