@@ -15,6 +15,9 @@ canvas.height = window.innerHeight;
 let canvasWidth = canvas.width;
 let canvasHeight = canvas.height;
 
+//boolean variable for game status
+let gameEnd = false; 
+
 //create an image object for the snowflake image
 let snowflake = new Image();
 //set the source of the snowflake image
@@ -28,7 +31,7 @@ snowflake.height = 50;
 
 //create an array of skier images using the generate skier function
 let skierArray = [];
-for (let i = 0; i < 4; i++) {
+for (let i = 0; i < 10; i++) {
     generateSkier();
 }
 
@@ -67,9 +70,10 @@ function animate() {
         moveSkier(skierArray[i], snowflake);
         checkCollision(skierArray[i]);
     }
-
+    if (gameEnd === false) {
     //pass the animate function into the request animation frame so that it will animate the canvas continually
     window.requestAnimationFrame(animate);
+    }
 }
 
 //create an erase function that wipes the screen after each animation
@@ -92,12 +96,13 @@ function handleMouseMove(e) {
 //function to check collisions between the skier and the snowflake
 function checkCollision(skier) {
     //variables to store the distance between the snowflake and the skier
-    let distX = snowflake.xPos - skier.xPos;
-    let distY = snowflake.yPos - skier.yPos;
+    // let distX = snowflake.xPos - skier.xPos;
+    // let distY = snowflake.yPos - skier.yPos;
 
     //check if the distance is less than 10, if so, call the gameOver function
-    if (distX < 10 && distY < 10) {
-        gameOver();
+    // if (distX < 10 && distY < 10)
+    if (snowflake.xPos === skier.xPos && snowflake.yPos  === skier.yPos) {
+        gameOver(); 
     }
 }
 
@@ -105,9 +110,8 @@ function checkCollision(skier) {
 //function to restart the game if a collision has occured
 function gameOver() { //there's problems with this function
     //draw a new background that says game over
-    context.fillStyle = "#FFFFFF";
-    context.fillRect(0, 0, canvasWidth, canvasHeight);
     context.drawImage(gameOverBackground, 0, 0, canvasWidth, canvasHeight);
+    gameEnd = true;
 }
 
 //function to move the skiers closer to the mouse
