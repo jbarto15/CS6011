@@ -1,9 +1,6 @@
 package com.example.synthesizer;
 
-import SynthesizerBasic.AudioClip;
-import SynthesizerBasic.AudioComponent;
-import SynthesizerBasic.Mixer;
-import SynthesizerBasic.SineWave;
+import SynthesizerBasic.*;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
@@ -131,9 +128,9 @@ public class SynthesizerApplication extends Application {
     //component method that creates a sine wave, a volume adjuster widget and adds them to the center panel
     private void createAudioAdjusterComponent(ActionEvent e) {
         //create a new sine wave
-        AudioComponent sinewave = new SineWave(200);
+        AudioComponent adjustVolume = new VolumeAdjuster(2);
         //create a new widget
-        VolumeAdjusterWidget widget = new VolumeAdjusterWidget(sinewave, centerPanel,"Volume Adjuster");
+        VolumeAdjusterWidget widget = new VolumeAdjusterWidget(adjustVolume, centerPanel,"Volume Adjuster");
         //add the widget to the center panel
         centerPanel.getChildren().add(widget);
         //add the widget to the array list of widgets
@@ -144,9 +141,9 @@ public class SynthesizerApplication extends Application {
     //component method that creates a sine wave, a volume adjuster widget and adds them to the center panel
     private void createMixerComponent(ActionEvent e) {
         //create a new sine wave
-        AudioComponent sinewave = new SineWave(200);
+        AudioComponent mixer = new Mixer();
         //create a new widget
-        MixerWidget widget = new MixerWidget(sinewave, centerPanel,"Mixer");
+        MixerWidget widget = new MixerWidget(mixer, centerPanel,"Mixer");
         //add the widget to the center panel
         centerPanel.getChildren().add(widget);
         //add the widget to the array list of widgets

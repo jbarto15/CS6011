@@ -6,8 +6,12 @@
   <component name="ChangeListManager">
     <list default="true" id="63cb3924-0e7c-4fcf-8bce-f5e7b79fd03a" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/../../../Week1/Day2/Rainfall/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Week1/Day2/Rainfall/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Week1/Day4/MyHttpServer/src/HTTPResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Week1/Day4/MyHttpServer/src/HTTPResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Week1/Day4/MyHttpServer/src/webServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Week1/Day4/MyHttpServer/src/webServer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../Week3/Day12/Sorting/sorting.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Week3/Day12/Sorting/sorting.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/synthesizer/SynthesizerApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/synthesizer/SynthesizerApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/synthesizer/VolumeAdjusterWidget.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/synthesizer/VolumeAdjusterWidget.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Week4/Day16/WebChat/webclient.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Week4/Day16/WebChat/webclient.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,16 +38,16 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
-    "git-widget-placeholder": "main"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="com.example.synthesizer" />
