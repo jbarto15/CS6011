@@ -126,13 +126,11 @@ function handleSendMessage(event) {
 function handleConnect(event) {
     ws.send("Hello from client");
     wsOpen = true;
-    // handle something
 }
 
 //function that will handle closing the connection
 function handleClose(event) {
     alert("Connection is closed...");
-
 }
 
 //function that will handle any errors
