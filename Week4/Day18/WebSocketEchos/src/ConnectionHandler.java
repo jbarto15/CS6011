@@ -2,18 +2,19 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.Socket;
+import java.security.NoSuchAlgorithmException;
 
-public class MyRunnable implements Runnable {
+public class ConnectionHandler implements Runnable {
     Socket client_;
 
-    MyRunnable(Socket client) {
+    ConnectionHandler(Socket client) {
         client_ = client;
     }
     @Override
     public void run() {
-        InputStream clientReq = null;
+        InputStream inputStream = null;
         try {
-            clientReq = client_.getInputStream();
+            inputStream = client_.getInputStream();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -24,13 +25,14 @@ public class MyRunnable implements Runnable {
             throw new RuntimeException(e);
         }
 
-        HTTPRequest request = new HTTPRequest(clientReq);
-        String filename = request.getFileName(clientReq);
-        System.out.println(filename);
+        HTTPRequest request = new HTTPRequest(inputStream);
+        String filename = request.getFileName();
+        System.out.println("found filename of: " + filename);
+        //request.parse(); // getFileName() now does this
 
         HTTPResponse response = null;
         try {
-            response = new HTTPResponse(filename, outputStream);
+            response = new HTTPResponse(filename, outputStream, request);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -42,8 +44,11 @@ public class MyRunnable implements Runnable {
         try {
             response.streamOutFile();
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            //throw new RuntimeException(e);
+        } catch (NoSuchAlgorithmException e) {
+            //throw new RuntimeException(e);
         }
+
     }
 }
 

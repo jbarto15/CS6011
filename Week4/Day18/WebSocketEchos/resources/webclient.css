@@ -1,0 +1,34 @@
+
+h1 {
+    text-align: center;
+}
+
+#userNameBox {
+    margin-right: 100px;
+}
+
+#roomBox {
+    position: center;
+}
+
+
+#container {
+    width: 1200px;
+    background-color: #ffcc33;
+    margin: auto;
+}
+#peopleInRoom {
+    width: 400px;
+    float: left;
+    height: 400px;
+    background-color: rgb(149, 149, 213);
+}
+#messageCenter {
+    width: 800px;
+    float: left;
+    height: 400px;
+    background-color: #4CBB17;
+}
+#clear {
+    clear: both;
+}

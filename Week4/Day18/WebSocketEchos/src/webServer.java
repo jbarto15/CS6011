@@ -14,7 +14,7 @@ public class webServer {
             while (true) {
                 //create socket variable that creates a socket on the server to be able to recognize the client
                 Socket client = server.accept();
-                Thread thread = new Thread(new MyRunnable(client));
+                Thread thread = new Thread(new ConnectionHandler(client));
                 thread.start();
             }
         } catch (IOException e) {

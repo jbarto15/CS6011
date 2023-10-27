@@ -1,4 +1,9 @@
 import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.Base64;
+import java.util.HashMap;
 
 class HTTPResponse {
     //string to store the filename
@@ -17,26 +22,32 @@ class HTTPResponse {
 
     String errorFilePath;
 
+    //variable to store the HTTPRequest object
+    HTTPRequest request;
+
+    //print writer variable
+    PrintWriter outputHeader;
+
 
     //constructor
-    public HTTPResponse(String filename, OutputStream outputStream) throws IOException {
+    public HTTPResponse(String filename, OutputStream outputStream, HTTPRequest request) throws IOException {
 
         this.outputStream = outputStream;
         this.filename = filename;
-        this.htmlFile = new File("/Users/joshbarton/Desktop/MSD2023/CS6011/Week1/Day4/MyHttpServer/resources/" + filename);
+        this.htmlFile = new File("/Users/joshbarton/Desktop/MSD2023/CS6011/Week4/Day18/WebSocketEchos/resources/" + filename);
         this.inputFile = new FileInputStream(this.htmlFile);
-        this.errorFilePath = "/Users/joshbarton/Desktop/MSD2023/CS6011/Week1/Day4/MyHttpServer/resources/errorHtml.html";
+        this.errorFilePath = "resources/errorHtml.html";
         this.inputErrorFile = new FileInputStream(errorFilePath);
+        this.request = request;
+        this.outputHeader = new PrintWriter(outputStream);
 
         //create an exception if the htmlFile does not exist
         if (!htmlFile.exists()) {
             IOException e = new IOException("File requested does not exist!");
             throw e;
         }
-
     }
 
-    //method
 
     //stream in the file if the file exists and then transfer it to the output stream to the client
     public void streamInFile() throws IOException {
@@ -49,8 +60,13 @@ class HTTPResponse {
         }
     }
 
-    public void streamOutFile() throws IOException {
-        if (htmlFile.exists()) {
+    public void streamOutFile() throws IOException, NoSuchAlgorithmException {
+        boolean isWebSocket = request.headerInfo.containsKey("Sec-WebSocket-Key");
+
+        //if the request is a websocket request, send back the right header info
+        if (isWebSocket) {
+            sendWebSocketResponse();
+        } else if (htmlFile.exists() && !isWebSocket) {
             //give the header information to the client
             outputStream.write("HTTP/1.1 200 OK\n".getBytes());
             //variable that will store a split of the filename so that just the type of file is given
@@ -64,11 +80,6 @@ class HTTPResponse {
             for( int i = 0; i < htmlFile.length(); i++ ) {
                 outputStream.write(inputFile.read() );
                 outputStream.flush();
-                try {
-                    Thread.sleep( 1 ); // Maybe add <- if images are still loading too quickly...
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
             }
 
             //flush the output stream
@@ -76,6 +87,7 @@ class HTTPResponse {
 
             //close the output stream
             outputStream.close();
+            System.out.println("close");
         } else {
             //give the header information to the client and the file
             outputStream.write("HTTP/1.1 404 Not Found\n".getBytes());
@@ -90,7 +102,24 @@ class HTTPResponse {
             //close the output stream
             outputStream.close();
         }
+
+
     }
+
+
+    //method to send the web socket response
+    public void sendWebSocketResponse() throws IOException, NoSuchAlgorithmException {
+        String encodeKey = Base64.getEncoder().encodeToString(MessageDigest.getInstance("SHA-1")
+                .digest((request.headerInfo.get("Sec-WebSocket-Key") + "258EAFA5-E914-47DA-95CA-C5AB0DC85B11").getBytes("UTF-8")));
+        //if we have a Web Socket request line from the header then we want to send the appropriate header information
+        //send the appropriate header info
+        outputHeader.write("HTTP/1.1 101 Switching Protocols\r\n");
+        outputHeader.write("Upgrade: websocket\r\n");
+        outputHeader.write("Connection: Upgrade\r\n");
+        outputHeader.write("Sec-WebSocket-Accept: " + encodeKey + "\r\n\r\n");
+
+    }
+
 }
 
 

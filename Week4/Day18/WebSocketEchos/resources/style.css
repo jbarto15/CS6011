@@ -1,0 +1,39 @@
+h1 {
+
+color: blue;
+font-family: halyard;
+
+}
+
+body {
+
+background-color: rgb(226, 200, 166);
+}
+
+p {
+color: blue;
+font-family: halyard;
+}
+
+ul  {
+    color: blue;
+}
+
+#skierpicture {
+    width: 350px;
+    height: 250px;
+
+}
+
+#mountainbikingpic {
+    width: 350px;
+    height: 250px;
+}
+
+h2 {
+    color: blue;
+}
+
+h3 {
+    color: blue;
+}
