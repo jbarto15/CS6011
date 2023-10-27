@@ -42,7 +42,7 @@ public class ConnectionHandler implements Runnable {
             throw new RuntimeException(e);
         }
         try {
-            response.streamOutFile();
+            response.sendResponse();
         } catch (IOException e) {
             //throw new RuntimeException(e);
         } catch (NoSuchAlgorithmException e) {

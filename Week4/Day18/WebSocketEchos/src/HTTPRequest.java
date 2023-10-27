@@ -1,20 +1,18 @@
 import javax.lang.model.util.SimpleAnnotationValueVisitor6;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStream;
+import java.io.*;
 import java.net.Socket;
+import java.security.MessageDigest;
+import java.util.Base64;
 import java.util.HashMap;
 import java.util.Scanner;
 
 public class HTTPRequest {
     //input stream
-    InputStream requestFromClient;
+    public InputStream requestFromClient;  // FIXME don't make this public
 
     //variable to store the rest of the header information after the parsing
     public HashMap<String, String> headerInfo;
 
-    //variable to store the magic string
-    public String magicString;
 
     //constructor that takes the client.getRequest
     public HTTPRequest(InputStream clientRequest) {
@@ -46,42 +44,29 @@ public class HTTPRequest {
             String line = scanner.nextLine();
             //System.out.println("Read line: " + line);
             if (line.isEmpty()) {
-                System.out.println("Line is empty!");
+                // System.out.println("Line is empty!");
                 break;
             }
 
             //parse the client request into parts based on where there is a space and store it into an array of strings
-            String[] parts = line.split(":");
+            String[] parts = line.split(": ");
 
             //store the first part of the request as the keyword for the map, and the second part as the values
             headerInfo.put(parts[0], parts[1]);
         }
 
         // Print keys and values
-        for (String i : headerInfo.keySet()) {
-            System.out.println("key: " + i + " value: " + headerInfo.get(i));
-        }
+//        for (String i : headerInfo.keySet()) {
+//            System.out.println("key: " + i + " value: " + headerInfo.get(i));
+//        }
 
-        // System.out.println( "headers are: " + headerInfo);
+        //if the filename is empty, put a / before it so I don't go into my resources folder
         if (filename.equals("")) {
             filename = "/";
         }
         return filename;
     }
 }
-
-
-
-
-
-
-//        GET /chat HTTP/1.1
-//        Host: example.com:8000
-//        Upgrade: websocket
-//        Connection: Upgrade
-//        Sec-WebSocket-Key: dG...ZQ==
-//        Sec-WebSocket-Version: 13
-//
 
 
 
