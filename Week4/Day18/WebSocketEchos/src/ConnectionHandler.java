@@ -26,27 +26,22 @@ public class ConnectionHandler implements Runnable {
         }
 
         HTTPRequest request = new HTTPRequest(inputStream);
-        String filename = request.getFileName();
+        String filename = request.getFileNameAndHeaderInfo();
         System.out.println("found filename of: " + filename);
-        //request.parse(); // getFileName() now does this
+
 
         HTTPResponse response = null;
         try {
-            response = new HTTPResponse(filename, outputStream, request);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        try {
-            response.streamInFile();
+            response = new HTTPResponse(filename, outputStream, request, client_);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
         try {
             response.sendResponse();
         } catch (IOException e) {
-            //throw new RuntimeException(e);
-        } catch (NoSuchAlgorithmException e) {
-            //throw new RuntimeException(e);
+            throw new RuntimeException(e);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
 
     }

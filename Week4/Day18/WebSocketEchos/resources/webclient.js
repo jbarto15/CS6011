@@ -44,8 +44,17 @@ function mainFunction() {
             let message = messageInput.value;
             //if the websocket is open, send the username and room to the server
             if (wsOpen) {
+                //create JSON object for the join
+                let jsonJoin = {
+                    "type" : "join",
+                    "room" : roomInput.value,
+                    "user" : usernameInput.value,
+            }
+                //send the JSON join
+                ws.send(JSON.stringify(jsonJoin));
+
                 //send username and room
-                ws.send("join " + username + " " + room);
+                //ws.send("join " + username + " " + room);
             } else {
                 message.value = "Could not open the websocket!";
             }
@@ -58,7 +67,16 @@ function mainFunction() {
         let message = messageInput.value;
         //if the websocket is open, send the message to the server
         if (wsOpen) {
-            ws.send("message " + message);
+            let jsonMessage = {
+                "type"    : "message",
+                "user"    : usernameInput.value,
+                "room"    : roomInput.value,
+                "message" : message
+            }
+            ws.send(JSON.stringify(jsonMessage));
+
+            //send the message
+            //ws.send("message " + message);
 
         } else {
             message.value = "Could not open the websocket!";
@@ -71,7 +89,17 @@ function mainFunction() {
         let message = messageInput.value;
         //if the websocket is open, send the message to the server
         if (wsOpen) {
-            ws.send("leave");
+            //create a leave JSON object
+            let jsonLeave = {
+                "type" : "leave",
+                "room" : roomInput.value,
+                "user" : usernameInput.value,
+            }
+            //send the JSON join
+            ws.send(JSON.stringify(jsonLeave));
+
+            //send the leave
+            //ws.send("leave");
         } else {
             message.value = "Could not open the websocket!";
         }
@@ -102,8 +130,17 @@ function mainFunction() {
                 let message = messageInput.value;
                 //if the websocket is open, send the username and room to the server
                 if (wsOpen) {
+                    //create JSON object for the join
+                    let jsonJoin = {
+                        "type" : "join",
+                        "room" : roomInput.value,
+                        "user" : usernameInput.value,
+                    }
+                    //send the JSON join
+                    ws.send(JSON.stringify(jsonJoin));
+
                     //send username and room
-                    ws.send("join " + username + " " + room);
+                    //ws.send("join " + username + " " + room);
                 } else {
                     message.value = "Could not open the websocket!";
                 }
@@ -118,8 +155,17 @@ function mainFunction() {
             let message = messageInput.value;
             //if the websocket is open, send the username and room to the server
             if (wsOpen) {
+                let jsonMessage = {
+                    "type"    : "message",
+                    "user"    : usernameInput.value,
+                    "room"    : roomInput.value,
+                    "message" : message
+                }
+                ws.send(JSON.stringify(jsonMessage));
+
+
                 //send the message
-                ws.send("message " + message);
+                //ws.send("message " + message);
             } else {
                 message.value = "Could not open the websocket!";
             }
@@ -189,3 +235,5 @@ function mainFunction() {
 window.onload = mainFunction();
 
 
+//anywhere I have a ws.send I need to alter that send message and create a JSON object for that.
+// Once I have the JSON object I need to do ws.send(JSON.stringify(myJSONobject)

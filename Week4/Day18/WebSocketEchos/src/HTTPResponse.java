@@ -1,4 +1,5 @@
 import java.io.*;
+import java.net.Socket;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
@@ -26,9 +27,12 @@ class HTTPResponse {
     //print writer variable
     PrintWriter outputHeader;
 
+    //client socket variable
+    Socket clientSocket;
+
 
     //constructor
-    public HTTPResponse(String filename, OutputStream outputStream, HTTPRequest request) throws IOException {
+    public HTTPResponse(String filename, OutputStream outputStream, HTTPRequest request, Socket client) throws IOException {
 
         this.outputStream = outputStream;
         this.filename = filename;
@@ -38,6 +42,7 @@ class HTTPResponse {
         this.inputErrorFile = new FileInputStream(errorFilePath);
         this.request = request;
         this.outputHeader = new PrintWriter(outputStream);
+        this.clientSocket = client;
 
         //create an exception if the htmlFile does not exist
         if (!htmlFile.exists()) {
@@ -47,23 +52,13 @@ class HTTPResponse {
     }
 
 
-    //stream in the file if the file exists and then transfer it to the output stream to the client
-    public void streamInFile() throws IOException {
-        //create a File for the error file
-        File errorFile = new File(errorFilePath);
-        //if filename == / or /index.html then stream in the file
-        if (htmlFile.exists()) {
-            //create a filestream variable that streams in the html file
-            FileInputStream inputFile = new FileInputStream(htmlFile);
-        }
-    }
-
-    public void sendResponse() throws IOException, NoSuchAlgorithmException {
+    public void sendResponse() throws IOException, NoSuchAlgorithmException, Exception {
+        //boolean that checks if the web socket key is in my header info hash map
         boolean isWebSocket = request.headerInfo.containsKey("Sec-WebSocket-Key");
 
         //if the request is a websocket request, send back the right header info
         if (isWebSocket) {
-            sendWebSocketHeader(); // Note: this routine never ends...
+            openChat(); // Note: this routine never ends...
         }
 
         if (htmlFile.exists() && !isWebSocket) {
@@ -106,10 +101,12 @@ class HTTPResponse {
 
 
     //method to send the web socket response
-    public void sendWebSocketHeader() throws IOException, NoSuchAlgorithmException {
+    public void openChat() throws Exception {
+        //store the magic string that will be added to the web socket key
+        String magicString = "258EAFA5-E914-47DA-95CA-C5AB0DC85B11";
+        //store the encode key
         String encodeKey = Base64.getEncoder().encodeToString(MessageDigest.getInstance("SHA-1")
-                .digest((request.headerInfo.get("Sec-WebSocket-Key") + "258EAFA5-E914-47DA-95CA-C5AB0DC85B11").getBytes("UTF-8")));
-        //if we have a Web Socket request line from the header then we want to send the appropriate header information
+                .digest((request.headerInfo.get("Sec-WebSocket-Key") + magicString).getBytes("UTF-8")));
         //send the appropriate header info
         outputHeader.print("HTTP/1.1 101 Switching Protocols\r\n");
         outputHeader.print("Upgrade: websocket\r\n");
@@ -117,18 +114,62 @@ class HTTPResponse {
         outputHeader.print("Sec-WebSocket-Accept: " + encodeKey + "\r\n");
         outputHeader.print("\r\n"); // send blank line / end of headers
         outputHeader.flush();
-
+        //check to see if the header was sent
         System.out.println("Header was sent");
 
 
         // start talking binary over the ws with the client
         while(true) {
-            DataInputStream in = new DataInputStream( request.requestFromClient ); // note we need the whole socket, not just the in stream
+            //data input stream that will read in the bytes from the client socket
+            DataInputStream in = new DataInputStream( clientSocket.getInputStream() ); // note we need the whole socket, not just the in stream
+            //read in the first byte
             byte b0 = in.readByte();
+            //read in the second byte
             byte b1 = in.readByte();
 
-            int len = b1 & 0x7F;
-            System.out.println("Got a msg from the client with len: " + len);
+            //get the opcode
+            int opcode = b0 & 0x0F;
+
+            //get the payload length by doing bitwise and operation on b1
+            int length = b1 & 0x7F;
+            System.out.println("Got a msg from the client with length: " + length);
+
+            //check to see if the payload length is shorter than 126, if so, the length is equal to b1 & 0x7F
+            if (length < 126) {
+                length = b1 & 0x7F;
+            } else if (length == 126) {
+                length = in.readShort();
+            } else {
+                length = (int) in.readLong();
+            }
+
+            //boolean variable that lets us know if we have a mask or not
+            boolean hasMask = ((b1 & 0x80) != 0);
+
+            //if there is not a mask, then print an error
+            if (!hasMask) {
+                System.out.println("Error!!!!");
+                throw new Exception("unmasked msg from client");
+            }
+
+            //Print the opcode and the length
+            System.out.println("opcode: " + opcode + ", length" + length);
+
+            //read in 4 more bytes
+            byte [] mask = in.readNBytes(4);
+            byte [] payload = in.readNBytes(length);
+
+            System.out.println("payload length: " + payload.length);
+
+            //unmask the message
+            for (int i = 0; i < payload.length; i++) {
+                payload[i] = (byte) (payload[i] ^ mask[i % 4]);
+            }
+
+            //turn the message into a string
+            String message = new String(payload) + " Got your message";
+            System.out.println("Just got this message: " + message);
+
         }
     }
 

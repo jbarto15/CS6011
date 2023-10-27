@@ -1,8 +1,4 @@
-import javax.lang.model.util.SimpleAnnotationValueVisitor6;
 import java.io.*;
-import java.net.Socket;
-import java.security.MessageDigest;
-import java.util.Base64;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -21,7 +17,7 @@ public class HTTPRequest {
     }
 
     //get the file name by scanning the client request, take the string and split it up and give back the filename
-    public String getFileName() {
+    public String getFileNameAndHeaderInfo() {
         //create scanner to scan the input stream
         Scanner scanner = new Scanner(requestFromClient);
         //variable to store the filename
