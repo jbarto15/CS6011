@@ -2,7 +2,9 @@ package Game;
 
 import Items.Item;
 import Rooms.Cell;
+import Rooms.LaundryRoom;
 import Rooms.Room;
+import Rooms.SportsCourt;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -28,6 +30,11 @@ public class Adventure {
         // Room telep    = new Rooms.TeleportationChamber();
         Room cell = new Cell();
 
+        //create my sportsCourt object
+        Room sportsCourt = new SportsCourt("Sports Court", "A large indoor basketball court");
+        //create laundry room object
+        Room laundryRoom = new LaundryRoom("Laundry Room", "A great place to get clean");
+
         entrance.addConnection( cell );
         entrance.addConnection( outside );
         entrance.addConnection( hall );
@@ -36,6 +43,10 @@ public class Adventure {
         stairs.addConnection( bedroom );
         bedroom.addConnection( balcony );
         // bedroom.addConnection( telep );
+
+        //add my sports court off the great hall
+        hall.addConnection(sportsCourt);
+        hall.addConnection(laundryRoom);
 
         /////////////////////////////
         // Create Items in the house...
@@ -48,7 +59,7 @@ public class Adventure {
 
         Room currentRoom = entrance;
 
-        System.out.println( "Welcome to Game.Adventure 2022" );
+        System.out.println( "Welcome to Game. Adventure 2022" );
         System.out.println( "What would you like to do?" );
 
         Scanner sc = new Scanner( System.in );
