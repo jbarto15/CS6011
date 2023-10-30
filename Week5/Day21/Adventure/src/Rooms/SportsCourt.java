@@ -92,15 +92,3 @@ public class SportsCourt extends Room {
 
 
 }
-
-
-
-//maybe take the ball to the balcony to display your fame and glory
-
-
-//    DONE! - Your room must do something of interest and allow the player to interact with it.
-//    DONE! - It must keep track of some "state" - in other words, data that remains valid whether the player is in the room or not - and allow the player's interactions to change that state.
-//    Your room must contain at least one item and it must also allow interaction with at least one item (that is not your own).  See below.
-//    DONE! - Your room must respond to at least one command from the player.
-//    DONE! - Your room must be linked into the house off of the Grand Hall.
-//    DONE! - Make sure to add a plaque to your room that tells the reader who created the room and anything else you would like them to know.
