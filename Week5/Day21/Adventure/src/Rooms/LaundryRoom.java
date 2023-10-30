@@ -1,3 +1,5 @@
+//THIS CODE WAS WRITTEN BY ANDREW DELIS. Uses Josh Barton's ball to interact with the laundry room
+
 package Rooms;
 import Game.Adventure;
 import Items.Item;

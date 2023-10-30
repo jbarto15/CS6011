@@ -1,3 +1,8 @@
+//SPORTS COURT ROOM - BY JOSH BARTON
+
+//MY ROOM INTERACTS WITH ANDREW DELIS' LAUNDRY ROOM. I need his sock item in his room in order to make a shot...
+//in my sports court
+
 package Rooms;
 
 import Game.Adventure;
