@@ -175,7 +175,7 @@ function mainFunction() {
 
     //function that will handle the connection of the client to the server
     function handleConnect(event) {
-        ws.send("Hello");
+        //ws.send("Hello");
         wsOpen = true;
     }
 

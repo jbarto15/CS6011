@@ -2,7 +2,9 @@ import java.io.*;
 import java.net.Socket;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Arrays;
 import java.util.Base64;
+import java.util.HashMap;
 
 class HTTPResponse {
     //string to store the filename
@@ -25,7 +27,7 @@ class HTTPResponse {
     HTTPRequest request;
 
     //print writer variable
-    PrintWriter outputHeader;
+    PrintWriter output;
 
     //client socket variable
     Socket clientSocket;
@@ -41,7 +43,7 @@ class HTTPResponse {
         this.errorFilePath = "resources/errorHtml.html";
         this.inputErrorFile = new FileInputStream(errorFilePath);
         this.request = request;
-        this.outputHeader = new PrintWriter(outputStream);
+        this.output = new PrintWriter(outputStream);
         this.clientSocket = client;
 
         //create an exception if the htmlFile does not exist
@@ -108,12 +110,12 @@ class HTTPResponse {
         String encodeKey = Base64.getEncoder().encodeToString(MessageDigest.getInstance("SHA-1")
                 .digest((request.headerInfo.get("Sec-WebSocket-Key") + magicString).getBytes("UTF-8")));
         //send the appropriate header info
-        outputHeader.print("HTTP/1.1 101 Switching Protocols\r\n");
-        outputHeader.print("Upgrade: websocket\r\n");
-        outputHeader.print("Connection: Upgrade\r\n");
-        outputHeader.print("Sec-WebSocket-Accept: " + encodeKey + "\r\n");
-        outputHeader.print("\r\n"); // send blank line / end of headers
-        outputHeader.flush();
+        output.print("HTTP/1.1 101 Switching Protocols\r\n");
+        output.print("Upgrade: websocket\r\n");
+        output.print("Connection: Upgrade\r\n");
+        output.print("Sec-WebSocket-Accept: " + encodeKey + "\r\n");
+        output.print("\r\n"); // send blank line / end of headers
+        output.flush();
         //check to see if the header was sent
         System.out.println("Header was sent");
 
@@ -153,7 +155,7 @@ class HTTPResponse {
             }
 
             //Print the opcode and the length
-            System.out.println("opcode: " + opcode + ", length" + length);
+            System.out.println("opcode: " + opcode + ", length: " + length);
 
             //read in 4 more bytes
             byte [] mask = in.readNBytes(4);
@@ -167,8 +169,17 @@ class HTTPResponse {
             }
 
             //turn the message into a string
-            String message = new String(payload) + " Got your message";
+            String message = new String(payload);
             System.out.println("Just got this message: " + message);
+
+            //create a data output stream to stream the message back out
+            DataOutputStream dataOut = new DataOutputStream(clientSocket.getOutputStream());
+            //send the first byte of the header
+            dataOut.writeByte(0x81);
+            //send the length of the message
+            dataOut.writeByte(message.length());  //something is going on with this line
+            //send the message
+            dataOut.writeBytes(message);
 
         }
     }

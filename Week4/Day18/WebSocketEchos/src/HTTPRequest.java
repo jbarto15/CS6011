@@ -4,7 +4,10 @@ import java.util.Scanner;
 
 public class HTTPRequest {
     //input stream
-    public InputStream requestFromClient;  // FIXME don't make this public
+    InputStream requestFromClient;
+
+    //store the filename
+    String filename;
 
     //variable to store the rest of the header information after the parsing
     public HashMap<String, String> headerInfo;
@@ -14,14 +17,15 @@ public class HTTPRequest {
     public HTTPRequest(InputStream clientRequest) {
         requestFromClient = clientRequest;
         headerInfo = new HashMap<>();
+
     }
 
     //get the file name by scanning the client request, take the string and split it up and give back the filename
-    public String getFileNameAndHeaderInfo() {
+    public void getHeaderInfo() {
         //create scanner to scan the input stream
         Scanner scanner = new Scanner(requestFromClient);
         //variable to store the filename
-        String filename = "";
+        filename = "";
         if (scanner.hasNext()) {
             //store the client request in client request variable
             String clientRequest = scanner.nextLine();
@@ -57,13 +61,18 @@ public class HTTPRequest {
 //        }
 
         //if the filename is empty, put a / before it so I don't go into my resources folder
-        if (filename.equals("")) {
+        if (filename.isEmpty()) {
             filename = "/";
         }
+    }
+
+
+    //method that will get the name of the file
+    public String getFileName() {
         return filename;
     }
-}
 
+}
 
 
 
