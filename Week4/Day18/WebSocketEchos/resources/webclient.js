@@ -214,7 +214,7 @@ function mainFunction() {
         //create elements that will add text to the room and message center
         let addToRoom = document.createElement("p");
         let addToMessageCenter = document.createElement("p");
-        let addTime = document.createElement("p");
+        let addTimeToMessageCenter = document.createElement("p");
 
 
         if (object.type === "join") {
@@ -227,9 +227,9 @@ function mainFunction() {
         if (object.type === "message" && object.user !== "null") {
             //add the message to the division "message center"
             addToMessageCenter.innerHTML = user + ": " + message;
-            addTime.innerHTML = "time: " + time;
+            addTimeToMessageCenter.innerHTML = "time: " + time;
             messageCenter.appendChild(addToMessageCenter);
-            messageCenter.appendChild(addTime);
+            messageCenter.appendChild(addTimeToMessageCenter);
         }
 
         if (object.type === "leave") {
