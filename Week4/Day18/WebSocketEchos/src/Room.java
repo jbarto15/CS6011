@@ -1,5 +1,7 @@
 import java.io.DataOutputStream;
 import java.net.Socket;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -51,6 +53,7 @@ public class Room {
                 dataOut.writeByte(message.length());
                 //send the message
                 dataOut.writeBytes(message);
+
             } catch (Exception e) {
                 System.out.println("Error");
             }

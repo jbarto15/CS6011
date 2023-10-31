@@ -6,7 +6,7 @@ import java.net.Socket;
 takes the client requests and either sends them a file that they requested, or it creates
 a websocket that allows the client and server to exchange messages with one another*/
 
-/*My new feature is to */
+/*My new feature is to add the time to the message after it is sent */
 
 
 public class webServer {

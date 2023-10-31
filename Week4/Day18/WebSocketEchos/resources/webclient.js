@@ -153,13 +153,17 @@ function mainFunction() {
     function handleSendMessage(event) {
         if (event.code === "Enter") {
             let message = messageInput.value;
+            let currentDate = new Date();
+            let time = currentDate.getHours() + ":"
+                + currentDate.getMinutes() + ":" + currentDate.getSeconds();
             //if the websocket is open, send the username and room to the server
             if (wsOpen) {
                 let jsonMessage = {
                     "type"    : "message",
                     "user"    : usernameInput.value,
                     "room"    : roomInput.value,
-                    "message" : message
+                    "message" : message,
+                    "time"    : time
                 }
                 ws.send(JSON.stringify(jsonMessage));
 
@@ -202,6 +206,7 @@ function mainFunction() {
         let user = object.user;
         let room = object.room;
         let message = object.message;
+        let time = object.time;
 
         console.log(user);
         console.log(room);
@@ -209,19 +214,22 @@ function mainFunction() {
         //create elements that will add text to the room and message center
         let addToRoom = document.createElement("p");
         let addToMessageCenter = document.createElement("p");
+        let addTime = document.createElement("p");
 
 
         if (object.type === "join") {
             //add the user to the division "People in Room"
             addToRoom.innerHTML = user + " has joined the room: " + room;
-            //add the paragraph to the "People in Room divison"
+            //add the paragraph to the "People in Room division"
             peopleInRoom.appendChild(addToRoom);
         }
 
         if (object.type === "message" && object.user !== "null") {
             //add the message to the division "message center"
             addToMessageCenter.innerHTML = user + ": " + message;
+            addTime.innerHTML = "time: " + time;
             messageCenter.appendChild(addToMessageCenter);
+            messageCenter.appendChild(addTime);
         }
 
         if (object.type === "leave") {
