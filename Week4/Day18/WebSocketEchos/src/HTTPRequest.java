@@ -41,8 +41,9 @@ public class HTTPRequest {
         }
 
         while (true) {
+            //create a string that will store the next line of the request
             String line = scanner.nextLine();
-            //System.out.println("Read line: " + line);
+
             if (line.isEmpty()) {
                 // System.out.println("Line is empty!");
                 break;
@@ -55,12 +56,7 @@ public class HTTPRequest {
             headerInfo.put(parts[0], parts[1]);
         }
 
-        // Print keys and values
-//        for (String i : headerInfo.keySet()) {
-//            System.out.println("key: " + i + " value: " + headerInfo.get(i));
-//        }
-
-        //if the filename is empty, put a / before it so I don't go into my resources folder
+        //if the filename is empty, put a / before it, so I don't go into my resources folder
         if (filename.isEmpty()) {
             filename = "/";
         }
