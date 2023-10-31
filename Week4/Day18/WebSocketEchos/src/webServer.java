@@ -2,6 +2,12 @@ import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+/*This is a webserver program that creates a server, waits for the client to connect and then
+takes the client requests and either sends them a file that they requested, or it creates
+a websocket that allows the client and server to exchange messages with one another*/
+
+/*My new feature is to */
+
 
 public class webServer {
     public static void main(String[] args) {

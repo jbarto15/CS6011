@@ -2,15 +2,23 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.Socket;
 
+/*This is a Connection handler class which passes the socket of each client to this connection
+handler. The class creates an input and output stream object as well as an HTTPRequest and
+HTTPResponse object. The request object is able to get header information and filenames.
+The response object is able to send responses back to the client depending on what they are asking
+for
+*/
+
 public class ConnectionHandler implements Runnable {
     //member variable that stores the socket information of the client
-    Socket client_;
+    private Socket client_;
 
     ConnectionHandler(Socket client) {
         //assign the client given to us to our client member variable
         client_ = client;
     }
 
+    //this method runs each thread that we create
     @Override
     public void run() {
         try {

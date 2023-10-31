@@ -4,34 +4,40 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
 
+/*This is the HTTPResponse class which is the class that gives a response to the client based off their
+* request type. If the request is a file request then the response finds the requested file and then
+* sends it back to the client. If the request is a web socket request, the response class creates a
+* websocket connection, receives the incoming message, adds them to a room, and sends the message
+* to all clients in that room */
+
 class HTTPResponse {
     //string to store the filename
-    String filename;
+    private String filename;
     //file to store the file
-    File htmlFile;
+    private File htmlFile;
 
     //input stream to input the file
-    FileInputStream inputFile;
+    private FileInputStream inputFile;
 
     //input stream for the error file
-    FileInputStream inputErrorFile;
+    private FileInputStream inputErrorFile;
 
     //an output stream variable
-    OutputStream outputStream;
+    private OutputStream outputStream;
 
-    String errorFilePath;
+    private String errorFilePath;
 
     //variable to store the HTTPRequest object
-    HTTPRequest request;
+    private HTTPRequest request;
 
     //print writer variable
-    PrintWriter output;
+    private PrintWriter output;
 
     //client socket variable
-    Socket clientSocket;
+    private Socket clientSocket;
 
     //room variable to be used to determine where messages should be sent
-    Room room_;
+    private Room room_;
 
 
     //constructor
@@ -55,6 +61,8 @@ class HTTPResponse {
     }
 
 
+    //method that has no parameters and doesn't return anything. It sends a response to the client
+    //...depending on what they're request is
     public void sendResponse() throws IOException, NoSuchAlgorithmException, Exception {
         //boolean that checks if the web socket key is in my header info hash map
         boolean isWebSocket = request.headerInfo.containsKey("Sec-WebSocket-Key");
@@ -106,7 +114,7 @@ class HTTPResponse {
     }
 
 
-    //method to open websocket and send the web socket responses
+    //method to open websocket and send the web socket responses. Takes zero parameters and has no return type
     public void openChat() throws Exception {
         //store the magic string that will be added to the web socket key
         String magicString = "258EAFA5-E914-47DA-95CA-C5AB0DC85B11";
