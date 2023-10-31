@@ -2,6 +2,7 @@ import java.io.*;
 import java.net.Socket;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.sql.ClientInfoStatus;
 import java.util.Arrays;
 import java.util.Base64;
 import java.util.HashMap;
@@ -31,6 +32,7 @@ class HTTPResponse {
 
     //client socket variable
     Socket clientSocket;
+    Room room_;
 
 
     //constructor
@@ -172,14 +174,31 @@ class HTTPResponse {
             String message = new String(payload);
             System.out.println("Just got this message: " + message);
 
+            String roomName = message.split("\"room\":\"")[1].split("\"")[0];
+            String user = message.split("\"user\":\"")[1].split("\"")[0];
+            String type = message.split("\"type\":\"")[1].split("\"")[0];
+            if(type.equals("join")){
+                room_ = Room.getRoom(roomName);
+                this.room_.addAClient(user, clientSocket);
+                this.room_.sendMessage(message);
+            }
+            else if(type.equals("leave")){
+                this.room_.removeClient(user, clientSocket);
+                this.room_.sendMessage(message);
+            }
+            else{
+                this.room_.sendMessage(message);
+            }
+
+
             //create a data output stream to stream the message back out
-            DataOutputStream dataOut = new DataOutputStream(clientSocket.getOutputStream());
-            //send the first byte of the header
-            dataOut.writeByte(0x81);
-            //send the length of the message
-            dataOut.writeByte(message.length());  //something is going on with this line
-            //send the message
-            dataOut.writeBytes(message);
+//            DataOutputStream dataOut = new DataOutputStream(clientSocket.getOutputStream());
+//            //send the first byte of the header
+//            dataOut.writeByte(0x81);
+//            //send the length of the message
+//            dataOut.writeByte(message.length());  //something is going on with this line
+//            //send the message
+//            dataOut.writeBytes(message);
 
         }
     }
