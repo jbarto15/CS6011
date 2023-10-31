@@ -43,9 +43,8 @@ public class HTTPRequest {
         while (true) {
             //create a string that will store the next line of the request
             String line = scanner.nextLine();
-
+            //if the line is empty, break the while loop because we don't need additional header info
             if (line.isEmpty()) {
-                // System.out.println("Line is empty!");
                 break;
             }
 

@@ -2,10 +2,7 @@ import java.io.*;
 import java.net.Socket;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.sql.ClientInfoStatus;
-import java.util.Arrays;
 import java.util.Base64;
-import java.util.HashMap;
 
 class HTTPResponse {
     //string to store the filename
@@ -127,7 +124,7 @@ class HTTPResponse {
         System.out.println("Header was sent");
 
 
-        // start talking binary over the websocket with the client
+        //start talking binary over the websocket with the client
         while(true) {
             //data input stream that will read in the bytes from the client socket
             DataInputStream inData = new DataInputStream( clientSocket.getInputStream() );
@@ -136,10 +133,10 @@ class HTTPResponse {
             //read in the second byte
             byte b1 = inData.readByte();
 
-            //get the opcode
+            //get the opcode and store in opcode variable
             int opcode = b0 & 0x0F;
 
-            //get the payload length by doing bitwise and operation on b1
+            //get the payload length by doing bitwise & operation on b1
             int length = b1 & 0x7F;
             //System.out.println("Got a msg from the client with length: " + length);
 
@@ -161,15 +158,10 @@ class HTTPResponse {
                 throw new Exception("Unmasked message from the client.");
             }
 
-            //Print the opcode and the length
-            //System.out.println("opcode: " + opcode + ", length: " + length);
-
-            //read in 4 more bytes
+            //read in the next 4 bytes
             byte [] mask = inData.readNBytes(4);
             //read in the payload using the length variable because that helps us know how many bytes to read
             byte [] payload = inData.readNBytes(length);
-
-            //System.out.println("payload length: " + payload.length);
 
             //Unmask the message using the unmasking formula
             for (int i = 0; i < payload.length; i++) {
@@ -186,14 +178,14 @@ class HTTPResponse {
             String type = message.split("\"type\":\"")[1].split("\"")[0];
 
             //if the type is join, then add the client to the room and send a message to everyone in the
-            //room that the new user has joined
+            //...room that the new user has joined
             if (type.equals("join")){
                 room_ = Room.getRoom(roomName);
                 this.room_.addAClient(user, clientSocket);
                 this.room_.sendMessage(message);
             }
             //if type is leave, remove user from the room and send a message to all clients in that room
-            //that the user has left
+            //...that the user has left
             else if (type.equals("leave")){
                 this.room_.removeClient(user, clientSocket);
                 this.room_.sendMessage(message);
