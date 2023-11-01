@@ -154,8 +154,8 @@ function mainFunction() {
         if (event.code === "Enter") {
             let message = messageInput.value;
             let currentDate = new Date();
-            let time = currentDate.getHours() + ":"
-                + currentDate.getMinutes() + ":" + currentDate.getSeconds();
+            let time = currentDate.toLocaleTimeString();
+            
             //if the websocket is open, send the username and room to the server
             if (wsOpen) {
                 let jsonMessage = {
@@ -227,7 +227,7 @@ function mainFunction() {
         if (object.type === "message" && object.user !== "null") {
             //add the message to the division "message center"
             addToMessageCenter.innerHTML = user + ": " + message;
-            addTimeToMessageCenter.innerHTML = "time: " + time;
+            addTimeToMessageCenter.innerHTML = time;
             messageCenter.appendChild(addToMessageCenter);
             messageCenter.appendChild(addTimeToMessageCenter);
         }
