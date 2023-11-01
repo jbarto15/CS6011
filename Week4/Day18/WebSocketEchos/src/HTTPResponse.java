@@ -116,6 +116,24 @@ class HTTPResponse {
 
     //method to open websocket and send the web socket responses. Takes zero parameters and has no return type
     public void openChat() throws Exception {
+        //send the websocket header
+        sendWebSocketHeader();
+
+        //start talking binary over the websocket with the client
+        while(true) {
+            //call the readInData method and store the message that is returned in a string
+            String message = readInWebSocketData();
+
+            //call the sendMessage method to send the message back to the client(s)
+            sendChatMessage(message);
+        }
+    }
+
+
+
+
+    //method for sending the header information to the web socket client
+    public void sendWebSocketHeader() throws NoSuchAlgorithmException, UnsupportedEncodingException {
         //store the magic string that will be added to the web socket key
         String magicString = "258EAFA5-E914-47DA-95CA-C5AB0DC85B11";
         //store the encode key
@@ -130,81 +148,86 @@ class HTTPResponse {
         output.flush();
         //check to see if the header was sent
         System.out.println("Header was sent");
-
-
-        //start talking binary over the websocket with the client
-        while(true) {
-            //data input stream that will read in the bytes from the client socket
-            DataInputStream inData = new DataInputStream( clientSocket.getInputStream() );
-            //read in the first byte
-            byte b0 = inData.readByte();
-            //read in the second byte
-            byte b1 = inData.readByte();
-
-            //get the opcode and store in opcode variable
-            int opcode = b0 & 0x0F;
-
-            //get the payload length by doing bitwise & operation on b1
-            int length = b1 & 0x7F;
-            //System.out.println("Got a msg from the client with length: " + length);
-
-            //check to see if the payload length is shorter than 126, if so, the length is equal to b1 & 0x7F
-            if (length < 126) {
-                length = b1 & 0x7F;
-            } else if (length == 126) {
-                length = inData.readShort();
-            } else {
-                length = (int) inData.readLong();
-            }
-
-            //boolean variable that lets us know if we have a mask or not
-            boolean hasMask = ((b1 & 0x80) != 0);
-
-            //if there is not a mask, then print an error
-            if (!hasMask) {
-                System.out.println("Error!");
-                throw new Exception("Unmasked message from the client.");
-            }
-
-            //read in the next 4 bytes
-            byte [] mask = inData.readNBytes(4);
-            //read in the payload using the length variable because that helps us know how many bytes to read
-            byte [] payload = inData.readNBytes(length);
-
-            //Unmask the message using the unmasking formula
-            for (int i = 0; i < payload.length; i++) {
-                payload[i] = (byte) (payload[i] ^ mask[i % 4]);
-            }
-
-            //turn the message into a string
-            String message = new String(payload);
-            System.out.println("Just got this message: " + message);
-
-            //get the room name, user, and type from the message
-            String roomName = message.split("\"room\":\"")[1].split("\"")[0];
-            String user = message.split("\"user\":\"")[1].split("\"")[0];
-            String type = message.split("\"type\":\"")[1].split("\"")[0];
-
-            //if the type is join, then add the client to the room and send a message to everyone in the
-            //...room that the new user has joined
-            if (type.equals("join")){
-                room_ = Room.getRoom(roomName);
-                this.room_.addAClient(user, clientSocket);
-                this.room_.sendMessage(message);
-            }
-            //if type is leave, remove user from the room and send a message to all clients in that room
-            //...that the user has left
-            else if (type.equals("leave")){
-                this.room_.removeClient(user, clientSocket);
-                this.room_.sendMessage(message);
-            }
-            //send the message to everyone in the room
-            else {
-                this.room_.sendMessage(message);
-            }
-        }
     }
 
+
+    //method for reading in the data from the websocket which then returns a string with the message that was sent
+    public String readInWebSocketData() throws Exception {
+        //data input stream that will read in the bytes from the client socket
+        DataInputStream inData = new DataInputStream( clientSocket.getInputStream() );
+        //read in the first byte
+        byte b0 = inData.readByte();
+        //read in the second byte
+        byte b1 = inData.readByte();
+
+        //get the opcode and store in opcode variable
+        int opcode = b0 & 0x0F;
+
+        //get the payload length by doing bitwise & operation on b1
+        int length = b1 & 0x7F;
+        //System.out.println("Got a msg from the client with length: " + length);
+
+        //check to see if the payload length is shorter than 126, if so, the length is equal to b1 & 0x7F
+        if (length < 126) {
+            length = b1 & 0x7F;
+        } else if (length == 126) {
+            length = inData.readShort();
+        } else {
+            length = (int) inData.readLong();
+        }
+
+        //boolean variable that lets us know if we have a mask or not
+        boolean hasMask = ((b1 & 0x80) != 0);
+
+        //if there is not a mask, then print an error
+        if (!hasMask) {
+            System.out.println("Error!");
+            throw new Exception("Unmasked message from the client.");
+        }
+
+        //read in the next 4 bytes
+        byte [] mask = inData.readNBytes(4);
+        //read in the payload using the length variable because that helps us know how many bytes to read
+        byte [] payload = inData.readNBytes(length);
+
+        //Unmask the message using the unmasking formula
+        for (int i = 0; i < payload.length; i++) {
+            payload[i] = (byte) (payload[i] ^ mask[i % 4]);
+        }
+
+        //turn the message into a string
+        String message = new String(payload);
+        System.out.println("Just got this message: " + message);
+
+        return message;
+    }
+
+
+    //method to send the message back to the client which takes in a string as a parameter and doesn't return anything
+    public void sendChatMessage(String message) {
+        //get the room name, user, and type from the message
+        String roomName = message.split("\"room\":\"")[1].split("\"")[0];
+        String user = message.split("\"user\":\"")[1].split("\"")[0];
+        String type = message.split("\"type\":\"")[1].split("\"")[0];
+
+        //if the type is join, then add the client to the room and send a message to everyone in the
+        //...room that the new user has joined
+        if (type.equals("join")){
+            room_ = Room.getRoom(roomName);
+            this.room_.addAClient(user, clientSocket);
+            this.room_.sendMessage(message);
+        }
+        //if type is leave, remove user from the room and send a message to all clients in that room
+        //...that the user has left
+        else if (type.equals("leave")){
+            this.room_.removeClient(user, clientSocket);
+            this.room_.sendMessage(message);
+        }
+        //send the message to everyone in the room
+        else {
+            this.room_.sendMessage(message);
+        }
+    }
 }
 
 
