@@ -42,11 +42,18 @@ public class MainActivity extends AppCompatActivity {
         Log.d(MsTag, username_);
         Log.d(MsTag, roomName_);
 
+        //if the username and roomname are not empty then go to the next activity
+        if (!username_.isEmpty() && !roomName_.isEmpty()) {
+            Intent intent = new Intent(MainActivity.this, ChatActivity.class);
+            intent.putExtra("Username", username_);
+            intent.putExtra("Room", roomName_);
+            startActivity(intent);
+        }
 
-        Intent intent = new Intent( MainActivity.this, ChatActivity.class );
-        intent.putExtra( "Username", username_ );
-        intent.putExtra("Room", roomName_ );
-        startActivity( intent );
+        else {
+            //have a message alert that tells the user to enter both a username and a room name
+            Log.d(MsTag, "Please enter a username and room name");
+        }
     }
 
 
