@@ -2,6 +2,7 @@ package com.example.androidchatclient;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -121,28 +122,33 @@ public class ChatActivity extends AppCompatActivity {
     public static void sendJoinMsg() {
         //send the join message to the server
         ws.sendText(" {\"type\":\"join\",\"room\":\"" + roomName_ + "\",\"user\":\"" + userName_+"\"}");
-    }
-
-
-    public void sendMsg(View view) {
-        //log a message to the Logcat when the button is pressed
-        //Log.d( MsTag, "Send was pressed...");
-
-        //get the text area that message is in
-        EditText message = findViewById(R.id.messageText);
-
-        message_ = String.valueOf(message.getText());
-
-        //Log.d(MsTag, message_);
-
-        //send the message to the server
-        ws.sendText(" {\"type\":\"message\",\"user\":\"" + userName_ + "\",\"room\":\"" + roomName_ + "\",\"message\":\"" + message_ + "\"}");
 
     }
 
-    public static void sendLeaveMsg() {
+
+//    public void sendMsg(View view) {
+//        //log a message to the Logcat when the button is pressed
+//        //Log.d( MsTag, "Send was pressed...");
+//
+//        //get the text area that message is in
+//        EditText message = findViewById(R.id.messageText);
+//
+//        message_ = String.valueOf(message.getText());
+//
+//        //Log.d(MsTag, message_);
+//
+//        //send the message to the server
+//        ws.sendText(" {\"type\":\"message\",\"user\":\"" + userName_ + "\",\"room\":\"" + roomName_ + "\",\"message\":\"" + message_ + "\"}");
+//
+//    }
+
+    public void sendLeaveMsg(View view) {
         //send the leave message to the server
         ws.sendText(" {\"type\":\"leave\",\"room\":\"" + roomName_ + "\",\"user\":\"" + userName_ + "\",\"room\":\"" + roomName_ + "\"}");
+        Intent intent1 = new Intent(ChatActivity.this, MainActivity.class);
+        startActivity(intent1);
+
+
     }
 
 

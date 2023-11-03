@@ -39,10 +39,10 @@ public class MyWebSocket extends WebSocketAdapter {
         //use this in the if checks depending on what type of message it is
         if (jsonObject.getString("type").equals("join")) {
             //add the message to the list view
-            msg = userName + " has joined the room";
+            msg = userName + " has joined the room: " + jsonObject.getString("room");
         }
         else if (jsonObject.getString("type").equals("message")) {
-            msg = userName + " :" + jsonObject.getString("message");
+            msg = userName + ": " + jsonObject.getString("message");
         }
         else if (jsonObject.getString("type").equals("leave")) {
             msg = userName + " has left the room";
