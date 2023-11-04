@@ -9,8 +9,12 @@
       <change beforePath="$PROJECT_DIR$/../../../Week1/Day4/MyHttpServer/src/HTTPResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Week1/Day4/MyHttpServer/src/HTTPResponse.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../Week1/Day4/MyHttpServer/src/webServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Week1/Day4/MyHttpServer/src/webServer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/synthesizer/AudioComponentWidget.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/synthesizer/AudioComponentWidget.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../Week4/Day16/WebChat/webclient.css" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Week4/Day16/WebChat/webclient.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../Week4/Day17/MultithreadedWebServer/src/HTTPResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Week4/Day17/MultithreadedWebServer/src/HTTPResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Week4/Day18/WebSocketEchos/resources/webclient.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Week4/Day18/WebSocketEchos/resources/webclient.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Week4/Day18/WebSocketEchos/src/HTTPResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Week4/Day18/WebSocketEchos/src/HTTPResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Week4/Day18/WebSocketEchos/src/Room.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Week4/Day18/WebSocketEchos/src/Room.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

@@ -1,6 +1,7 @@
 package com.example.synthesizer;
 
 import SynthesizerBasic.AudioComponent;
+import SynthesizerBasic.Mixer;
 import SynthesizerBasic.SineWave;
 import SynthesizerBasic.VolumeAdjuster;
 import javafx.event.ActionEvent;
@@ -8,6 +9,7 @@ import javafx.event.Event;
 import javafx.geometry.Bounds;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
@@ -67,7 +69,7 @@ public class AudioComponentWidget extends Pane { //used to extend pane. Now it e
         //handle drawing the line - handle 3 events
         output.setOnMousePressed(e -> startConnection(e, output));
         output.setOnMouseDragged(e -> moveConnection(e, output));
-        output.setOnMouseReleased(e -> endConnection(e, output));
+        output.setOnMouseReleased(e -> endConnection(e)); //this had output by it like the other two above it
 
         //add the close button, and circle to the vertical box
         rightSide.getChildren().add(closeButton);
@@ -97,25 +99,81 @@ public class AudioComponentWidget extends Pane { //used to extend pane. Now it e
     }
 
 
-    //Methods that will handle the connections between widgets and with the speaker
-    private void endConnection(MouseEvent e, Circle output) {
-        //get the speaker from the main window
-        Circle speaker = SynthesizerApplication.speaker;
-        //create the bounds for the speaker
-        Bounds speakerBounds = speaker.localToScene(speaker.getBoundsInLocal());
+    public boolean lineIntersectsAnyNode() {
+        for (Node node : parent_.getChildren()) {
+            if (this instanceof SineWaveWidget && node instanceof MixerWidget) {
+                MixerWidget shape = (MixerWidget) node;
+                Bounds mixerBounds = shape.localToScene(shape.getBoundsInLocal());
+                if (mixerBounds.intersects(line_.localToScene(line_.getBoundsInLocal()))) {
+                    Mixer result = (Mixer) shape.component_;
+                    result.connectInput(this.component_);
+                    return true;
+                }
+            }
+            if (this instanceof SineWaveWidget && node instanceof VolumeAdjusterWidget) {
+                VolumeAdjusterWidget shape = (VolumeAdjusterWidget) node;
+                Bounds mixerBounds = shape.localToScene(shape.getBoundsInLocal());
+                if (mixerBounds.intersects(line_.localToScene(line_.getBoundsInLocal()))) {
+                    VolumeAdjuster result = (VolumeAdjuster) shape.component_;
+                    result.connectInput(this.component_);
+                    System.out.println(result);
+                    return true;
+                }
 
-        //calculate the distance between the line and the speaker so that they can connect
-        double distance = Math.sqrt(Math.pow(speakerBounds.getCenterX() - e.getSceneX(), 2.0 * Math.pow(speakerBounds.getCenterY() - e.getSceneY(), 2.0)));
-        //if the distance between the line and the speaker is less than 10 we want to add the widget to add the connected widget to a new array list of connected widgets
-        if (distance < 25) {
-            //add the wave to the connectedWidgets array list and not just the number of audio component widgets on the screen. We only want the connected widgets to play sound
-            SynthesizerApplication.connectedWidgets.add(this);
-        } else {
-            //if the line and the speaker are not less than 10 pixels away from each other, remove the line
-            parent_.getChildren().remove(line_);
-            //set the line to null to make sure it is not pointing
-            line_ = null;
+            }
+
+            if (this instanceof MixerWidget && node instanceof VolumeAdjusterWidget) {
+                VolumeAdjusterWidget shape = (VolumeAdjusterWidget) node;
+                Bounds mixerBounds = shape.localToScene(shape.getBoundsInLocal());
+                if (mixerBounds.intersects(line_.localToScene(line_.getBoundsInLocal()))) {
+                    VolumeAdjuster result = (VolumeAdjuster) shape.component_;
+                    result.connectInput(this.component_);
+//                    System.out.println("Mixer Wave Touching Volume True");
+//                    SynthesizeApplication.widgets_.add(this);
+                    System.out.println("Size of Volume Mixers " + SynthesizerApplication.widgets.size());
+                    return true;
+                }
+            }
         }
+        return false;
+    }
+
+
+//    //Methods that will handle the connections between widgets and with the speaker
+//    private void endConnection(MouseEvent e, Circle output) {
+//        //get the speaker from the main window
+//        Circle speaker = SynthesizerApplication.speaker;
+//        //create the bounds for the speaker
+//        Bounds speakerBounds = speaker.localToScene(speaker.getBoundsInLocal());
+//
+//        //calculate the distance between the line and the speaker so that they can connect
+//        double distance = Math.sqrt(Math.pow(speakerBounds.getCenterX() - e.getSceneX(), 2.0 * Math.pow(speakerBounds.getCenterY() - e.getSceneY(), 2.0)));
+//        //if the distance between the line and the speaker is less than 10 we want to add the widget to add the connected widget to a new array list of connected widgets
+//        if (distance < 25) {
+//            //add the wave to the connectedWidgets array list and not just the number of audio component widgets on the screen. We only want the connected widgets to play sound
+//            SynthesizerApplication.connectedWidgets.add(this);
+//        } else {
+//            //if the line and the speaker are not less than 10 pixels away from each other, remove the line
+//            parent_.getChildren().remove(line_);
+//            //set the line to null to make sure it is not pointing
+//            line_ = null;
+//        }
+//    }
+
+
+    private void endConnection(MouseEvent e) {
+        Circle speaker = SynthesizerApplication.speaker;
+        if (this instanceof MixerWidget || this instanceof SineWaveWidget || this instanceof VolumeAdjusterWidget) {
+
+            if (line_.intersects(speaker.getBoundsInParent())) {
+                System.out.println(" Line Touching Node");
+                SynthesizerApplication.connectedWidgets.add(this);
+            } else if (!lineIntersectsAnyNode()){
+                parent_.getChildren().remove(line_);
+                line_ = null;
+            }
+        }
+
     }
 
     private void moveConnection(MouseEvent e, Circle output) {
