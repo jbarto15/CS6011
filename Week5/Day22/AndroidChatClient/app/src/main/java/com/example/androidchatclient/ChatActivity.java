@@ -17,7 +17,10 @@ import com.neovisionaries.ws.client.WebSocket;
 import com.neovisionaries.ws.client.WebSocketFactory;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class ChatActivity extends AppCompatActivity {
 
@@ -38,6 +41,8 @@ public class ChatActivity extends AppCompatActivity {
     public static ListView listView_;
 
    public static ArrayAdapter adapter_;
+
+   public static String time_;
 
 
     @Override
@@ -60,6 +65,8 @@ public class ChatActivity extends AppCompatActivity {
             room.setText(roomName_);
 
             Log.d(MsTag, "Room name is: " + roomName_);
+
+
 
             //get the list view widget
             listView_ = findViewById(R.id.listView);
@@ -100,55 +107,55 @@ public class ChatActivity extends AppCompatActivity {
         //get the actual message and save it in a variable message
         message_ = message.getText().toString();
 
-        //add message to the array of messages
-        //messages_.add(message_);
-
         Log.d(MsTag, message_);
 
         //send the message to the server
-        ws.sendText(" {\"type\":\"message\",\"user\":\"" + userName_ + "\",\"room\":\"" + roomName_ + "\",\"message\":\"" + message_ + "\"}");
+        //ws.sendText(" {\"type\":\"message\",\"user\":\"" + userName_ + "\",\"room\":\"" + roomName_ + "\",\"message\":\"" + message_ + "\"}");        //,\"time\":\"" + time_
+
+        // Get the current time
+        LocalDateTime currentTime = null;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            currentTime = LocalDateTime.now();
+        }
+
+        // Define a format for the time
+        DateTimeFormatter formatter = null;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+        }
+
+        // Format the current time as a string
+        String formattedTime = null;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            formattedTime = currentTime.format(formatter);
+        }
+
+        // Include the formatted time in your message JSON
+        String msg = String.format("{\"type\":\"message\",\"user\":\"%s\",\"room\":\"%s\",\"message\":\"%s\",\"time\":\"%s\"}",
+                userName_, roomName_, message_, formattedTime);
+
+        // Send the message
+        ws.sendText(msg);
+
+
+
+
+
 
     }
 
-
-    public void handleJoinMsg() {
-
-    }
-
-    public void handleLeaveMsg() {
-
-    }
 
     public static void sendJoinMsg() {
         //send the join message to the server
         ws.sendText(" {\"type\":\"join\",\"room\":\"" + roomName_ + "\",\"user\":\"" + userName_+"\"}");
-
     }
 
-
-//    public void sendMsg(View view) {
-//        //log a message to the Logcat when the button is pressed
-//        //Log.d( MsTag, "Send was pressed...");
-//
-//        //get the text area that message is in
-//        EditText message = findViewById(R.id.messageText);
-//
-//        message_ = String.valueOf(message.getText());
-//
-//        //Log.d(MsTag, message_);
-//
-//        //send the message to the server
-//        ws.sendText(" {\"type\":\"message\",\"user\":\"" + userName_ + "\",\"room\":\"" + roomName_ + "\",\"message\":\"" + message_ + "\"}");
-//
-//    }
 
     public void sendLeaveMsg(View view) {
         //send the leave message to the server
         ws.sendText(" {\"type\":\"leave\",\"room\":\"" + roomName_ + "\",\"user\":\"" + userName_ + "\",\"room\":\"" + roomName_ + "\"}");
         Intent intent1 = new Intent(ChatActivity.this, MainActivity.class);
         startActivity(intent1);
-
-
     }
 
 
