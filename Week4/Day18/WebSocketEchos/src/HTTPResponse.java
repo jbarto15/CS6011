@@ -2,13 +2,14 @@ import java.io.*;
 import java.net.Socket;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.Base64;
 
 /*This is the HTTPResponse class which is the class that gives a response to the client based off their
-* request type. If the request is a file request then the response finds the requested file and then
-* sends it back to the client. If the request is a web socket request, the response class creates a
-* websocket connection, receives the incoming message, adds them to a room, and sends the message
-* to all clients in that room */
+ * request type. If the request is a file request then the response finds the requested file and then
+ * sends it back to the client. If the request is a web socket request, the response class creates a
+ * websocket connection, receives the incoming message, adds them to a room, and sends the message
+ * to all clients in that room */
 
 class HTTPResponse {
     //string to store the filename
@@ -214,7 +215,7 @@ class HTTPResponse {
         //...room that the new user has joined
         if (type.equals("join")){
             room_ = Room.getRoom(roomName);
-            this.room_.addAClient(user, clientSocket);
+            this.room_.addAClient(user, clientSocket, message );
             this.room_.sendMessage(message);
         }
         //if type is leave, remove user from the room and send a message to all clients in that room
@@ -229,6 +230,3 @@ class HTTPResponse {
         }
     }
 }
-
-
-

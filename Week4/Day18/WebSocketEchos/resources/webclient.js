@@ -155,7 +155,7 @@ function mainFunction() {
             let message = messageInput.value;
             let currentDate = new Date();
             let time = currentDate.toLocaleTimeString();
-            
+
             //if the websocket is open, send the username and room to the server
             if (wsOpen) {
                 let jsonMessage = {
