@@ -22,6 +22,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 
+import java.util.ArrayList;
+
 public class AudioComponentWidget extends Pane { //used to extend pane. Now it extends AudioComponentWidgetBase because we made a super class that will create all widgets
     //member variable for the audiocomponent
     public AudioComponent component_;
@@ -41,6 +43,9 @@ public class AudioComponentWidget extends Pane { //used to extend pane. Now it e
     public double mouseXPos, mouseYPos, widgetXPos, widgetYPos;
     //variable that will store the line being drawn
     public static Line line_;
+
+    //array list to store lines that are connected from one widget to another or to the speaker
+    private ArrayList<Line> connectedLines = new ArrayList<>();
 
 
     //vertical box for the leftside of the widget
@@ -139,28 +144,7 @@ public class AudioComponentWidget extends Pane { //used to extend pane. Now it e
     }
 
 
-//    //Methods that will handle the connections between widgets and with the speaker
-//    private void endConnection(MouseEvent e, Circle output) {
-//        //get the speaker from the main window
-//        Circle speaker = SynthesizerApplication.speaker;
-//        //create the bounds for the speaker
-//        Bounds speakerBounds = speaker.localToScene(speaker.getBoundsInLocal());
-//
-//        //calculate the distance between the line and the speaker so that they can connect
-//        double distance = Math.sqrt(Math.pow(speakerBounds.getCenterX() - e.getSceneX(), 2.0 * Math.pow(speakerBounds.getCenterY() - e.getSceneY(), 2.0)));
-//        //if the distance between the line and the speaker is less than 10 we want to add the widget to add the connected widget to a new array list of connected widgets
-//        if (distance < 25) {
-//            //add the wave to the connectedWidgets array list and not just the number of audio component widgets on the screen. We only want the connected widgets to play sound
-//            SynthesizerApplication.connectedWidgets.add(this);
-//        } else {
-//            //if the line and the speaker are not less than 10 pixels away from each other, remove the line
-//            parent_.getChildren().remove(line_);
-//            //set the line to null to make sure it is not pointing
-//            line_ = null;
-//        }
-//    }
-
-
+    //method that determines the end connection for the drawing of the line
     private void endConnection(MouseEvent e) {
         Circle speaker = SynthesizerApplication.speaker;
         if (this instanceof MixerWidget || this instanceof SineWaveWidget || this instanceof VolumeAdjusterWidget) {
@@ -176,6 +160,7 @@ public class AudioComponentWidget extends Pane { //used to extend pane. Now it e
 
     }
 
+
     private void moveConnection(MouseEvent e, Circle output) {
         //create the bounds for the parent
         Bounds parentBounds = parent_.getBoundsInParent();
@@ -185,14 +170,18 @@ public class AudioComponentWidget extends Pane { //used to extend pane. Now it e
 
     }
 
+    //My original code
     private void startConnection(MouseEvent e, Circle output) {
-        //check to see if the line is not null, and if it is not, remove the line
-        if (line_ != null) {
-            parent_.getChildren().remove(line_);
-        }
+
         //get the bounds of the parent and output
         Bounds parentBounds = parent_.getBoundsInParent();
         Bounds bounds = output.localToScene(output.getBoundsInLocal());
+
+        //check to see if the line is not null, and if it is not, remove the line
+//        if (line_ != null) {
+//            parent_.getChildren().remove(line_);
+//        }
+
 
         //create a new line and set the stroke width, we made this a global variable in the class so that it could be used by all the connection methods
         line_ = new Line();
@@ -210,13 +199,13 @@ public class AudioComponentWidget extends Pane { //used to extend pane. Now it e
         parent_.getChildren().add(line_);
     }
 
+
+
     //method that sets the frequency, responds to the event of a mouse
     protected void setFrequency(MouseEvent e, Slider freqSlider) {
         //cast sine wave to the component so it knows that our component is of type sine wave, use the set frequency method
         //in our sin wave class to set the frequency to our parameter freqSlider
         ((SineWave) component_).setFrequency((freqSlider.getValue()));
-
-        //need to add left side stuff above to this method
     }
 
 
@@ -229,6 +218,7 @@ public class AudioComponentWidget extends Pane { //used to extend pane. Now it e
         //remove the connected widget and the line that is connected when we close the widget
         SynthesizerApplication.connectedWidgets.remove(this);
         parent_.getChildren().remove(line_);
+
     }
 
     //method to move the widget

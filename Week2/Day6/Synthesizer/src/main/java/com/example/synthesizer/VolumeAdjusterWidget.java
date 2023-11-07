@@ -16,10 +16,10 @@ public class VolumeAdjusterWidget extends AudioComponentWidget {
     public VolumeAdjusterWidget(AudioComponent component, AnchorPane parent, String label) {
         super(component, parent, label);
         //create a default AudioComponent object
-        AudioComponent defaultComponent = new VolumeAdjuster(1);
+        //AudioComponent defaultComponent = new VolumeAdjuster(10);
 
         //create a slider to adjust the volume
-        Slider scaleSlider = new Slider(1, 10, 5);
+        Slider scaleSlider = new Slider(0, 10, 5);
         leftside.getChildren().add(scaleSlider);
         scaleSlider.setOnMouseDragged(e -> setScale(e, scaleSlider));
 

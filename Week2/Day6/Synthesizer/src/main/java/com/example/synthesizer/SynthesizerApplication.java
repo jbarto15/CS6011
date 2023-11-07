@@ -78,10 +78,18 @@ public class SynthesizerApplication extends Application {
         Button mixer = new Button("Mixer");
         mixer.setPadding(new Insets(10));
         mixer.setOnAction(e->createMixerComponent(e));
+        Button linearRamp = new Button("Linear Ramp");
+        linearRamp.setPadding(new Insets(10));
+        linearRamp.setOnAction(e->createLinearRampComponent(e));
+        Button vfSineWave = new Button("VF Sine Wave");
+        vfSineWave.setPadding(new Insets(10));
+        vfSineWave.setOnAction(e->createVFSineWaveComponent(e));
         //add children nodes to the right panel
         rightPanel.getChildren().add(sineWave);
         rightPanel.getChildren().add(volumeAdjuster);
         rightPanel.getChildren().add(mixer);
+        rightPanel.getChildren().add(linearRamp);
+        rightPanel.getChildren().add(vfSineWave);
 
         //BOTTOM PANEL
         //create bottom panel and set the style, create a play button
@@ -111,6 +119,30 @@ public class SynthesizerApplication extends Application {
         stage.show();
     }
 
+    private void createVFSineWaveComponent(ActionEvent e) {
+        //create a new VFSine wave
+        AudioComponent vfSineWave = new VFSineWave();
+        //create a new widget
+        VFSineWaveWidget widget = new VFSineWaveWidget(vfSineWave, centerPanel,"VF Sine Wave");
+        //add the widget to the center panel
+        centerPanel.getChildren().add(widget);
+        //add the widget to the array list of widgets
+        widgets.add(widget);
+    }
+
+    //component method that creates a linear ramp, a widget and adds them to the center panel
+    private void createLinearRampComponent(ActionEvent e) {
+        //create a new linear ramp
+        AudioComponent linearRamp = new LinearRamp(1,5);
+        //create a new widget
+        LinearRampWidget widget = new LinearRampWidget(linearRamp, centerPanel,"Linear Ramp");
+        //add the widget to the center panel
+        centerPanel.getChildren().add(widget);
+        //add the widget to the array list of widgets
+        widgets.add(widget);
+
+    }
+
     //component method that creates a sine wave, a widget and adds them to the center panel
     private void createSineWaveComponent(ActionEvent e) {
         //create a new sine wave
@@ -128,7 +160,7 @@ public class SynthesizerApplication extends Application {
     //component method that creates a sine wave, a volume adjuster widget and adds them to the center panel
     private void createAudioAdjusterComponent(ActionEvent e) {
         //create a new sine wave
-        AudioComponent adjustVolume = new VolumeAdjuster(2);
+        AudioComponent adjustVolume = new VolumeAdjuster(10);
         //create a new widget
         VolumeAdjusterWidget widget = new VolumeAdjusterWidget(adjustVolume, centerPanel,"Volume Adjuster");
         //add the widget to the center panel
