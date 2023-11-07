@@ -136,29 +136,25 @@ public class ChatActivity extends AppCompatActivity {
 
         // Send the message
         ws.sendText(msg);
-
-
-
-
-
-
     }
 
 
+    //method that sends the join msg to the server
     public static void sendJoinMsg() {
         //send the join message to the server
         ws.sendText(" {\"type\":\"join\",\"room\":\"" + roomName_ + "\",\"user\":\"" + userName_+"\"}");
     }
 
 
+    //method that sends the leave msg to the server and takes the user to the main login page
+    //when the leave button is clicked
     public void sendLeaveMsg(View view) {
         //send the leave message to the server
         ws.sendText(" {\"type\":\"leave\",\"room\":\"" + roomName_ + "\",\"user\":\"" + userName_ + "\",\"room\":\"" + roomName_ + "\"}");
+        //take the user to the login page
         Intent intent1 = new Intent(ChatActivity.this, MainActivity.class);
         startActivity(intent1);
     }
-
-
 
 
 

@@ -60,44 +60,6 @@ public class MyWebSocket extends WebSocketAdapter {
             }
         });
 
-
-
-
-
-
-
-        //PSUEDO CODE
-        //1. get the received message and store it in a variable that we will use later on in the code
-        //2. The object we received I think will be a JSON object so we want to parse the object
-        //and store the user, room, message, and time information in a JSON object
-        //3. Add the
-
-        //create elements that will add text to the room and message center
-//        let addToRoom = document.createElement("p");
-//        let addToMessageCenter = document.createElement("p");
-//        let addTimeToMessageCenter = document.createElement("p");
-//
-//
-//        if (object.type === "join") {
-//            //add the user to the division "People in Room"
-//            addToRoom.innerHTML = user + " has joined the room: " + room;
-//            //add the paragraph to the "People in Room division"
-//            peopleInRoom.appendChild(addToRoom);
-//        }
-//
-//        if (object.type === "message" && object.user !== "null") {
-//            //add the message to the division "message center"
-//            addToMessageCenter.innerHTML = user + ": " + message;
-//            addTimeToMessageCenter.innerHTML = time;
-//            messageCenter.appendChild(addToMessageCenter);
-//            messageCenter.appendChild(addTimeToMessageCenter);
-//        }
-//
-//        if (object.type === "leave") {
-//            let leaveMessage = document.createElement("p");
-//            leaveMessage.innerHTML = user + " left the room."
-//            peopleInRoom.appendChild(leaveMessage);
-//        }
     }
 
 
