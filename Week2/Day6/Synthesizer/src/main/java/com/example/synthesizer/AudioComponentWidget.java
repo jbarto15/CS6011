@@ -104,6 +104,7 @@ public class AudioComponentWidget extends Pane { //used to extend pane. Now it e
     }
 
 
+    //method that checks if a line intersects between widgets
     public boolean lineIntersectsAnyNode() {
         for (Node node : parent_.getChildren()) {
             if (this instanceof SineWaveWidget && node instanceof MixerWidget) {
