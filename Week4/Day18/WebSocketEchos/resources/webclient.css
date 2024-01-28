@@ -1,34 +1,82 @@
 
-h1 {
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+#chat-container {
+    max-width: 800px;
+    margin: 50px auto;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    overflow: hidden;
+    background-color: #f8f8f8;
+}
+
+#header {
+    background-color: #3498db;  /*#3498db*/
+    color: #fff;
+    padding: 10px;
     text-align: center;
 }
 
-#userNameBox {
-    margin-right: 100px;
+#user-input,
+#main-content,
+#message-input {
+    padding: 10px;
 }
 
-#roomBox {
-    position: center;
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
 }
 
+input {
+    width: calc(100% - 12px);
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
 
-#container {
-    width: 1200px;
-    background-color: #ffcc33;
-    margin: auto;
+button {
+    background-color: #2ecc71;
+    color: #fff;
+    border: none;
+    padding: 8px 15px;
+    margin-right: 5px;
+    cursor: pointer;
 }
-#peopleInRoom {
-    width: 400px;
-    float: left;
-    height: 400px;
-    background-color: rgb(149, 149, 213);
+
+#main-content {
+    display: flex;
 }
+
+#peopleInRoom,
 #messageCenter {
-    width: 800px;
-    float: left;
-    height: 400px;
-    background-color: #4CBB17;
+    width: 50%;
+    padding: 10px;
+    box-sizing: border-box;
+    height: 300px;
+    overflow-y: auto;
+    border: 1px solid #f8f8f8;
 }
-#clear {
-    clear: both;
+
+#peopleInRoom {
+    background-color: #3498db; /*#e1bee7*/
+}
+
+#messageCenter {
+    background-color: #3498db; /*#c8e6c9*/
+}
+
+#message-input input {
+    width: calc(100% - 80px);
+    margin-right: 5px;
+}
+
+#leaveButton {
+    background-color: #e74c3c;
 }

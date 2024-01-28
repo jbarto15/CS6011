@@ -53,8 +53,6 @@ function mainFunction() {
                 //send the JSON join
                 ws.send(JSON.stringify(jsonJoin));
 
-                //send username and room
-                //ws.send("join " + username + " " + room);
             } else {
                 message.value = "Could not open the websocket!";
             }
@@ -74,9 +72,6 @@ function mainFunction() {
                 "message" : message
             }
             ws.send(JSON.stringify(jsonMessage));
-
-            //send the message
-            //ws.send("message " + message);
 
         } else {
             message.value = "Could not open the websocket!";
@@ -98,8 +93,6 @@ function mainFunction() {
             //send the JSON join
             ws.send(JSON.stringify(jsonLeave));
 
-            //send the leave
-            //ws.send("leave");
         } else {
             message.value = "Could not open the websocket!";
         }
@@ -139,8 +132,6 @@ function mainFunction() {
                     //send the JSON join
                     ws.send(JSON.stringify(jsonJoin));
 
-                    //send username and room
-                    //ws.send("join " + username + " " + room);
                 } else {
                     message.value = "Could not open the websocket!";
                 }
@@ -167,9 +158,10 @@ function mainFunction() {
                 }
                 ws.send(JSON.stringify(jsonMessage));
 
+                //after message is sent, clear the text box
+                let messageInput = document.getElementById("inputMessage");
+                messageInput.value = "";
 
-                //send the message
-                //ws.send("message " + message);
             } else {
                 message.value = "Could not open the websocket!";
             }
@@ -213,8 +205,9 @@ function mainFunction() {
 
         //create elements that will add text to the room and message center
         let addToRoom = document.createElement("p");
-        let addToMessageCenter = document.createElement("p");
-        let addTimeToMessageCenter = document.createElement("p");
+        let addToMessageCenter = document.createElement("div");
+        let messageParagraph = document.createElement("p");
+        let timeParagraph = document.createElement("p");
 
 
         if (object.type === "join") {
@@ -226,10 +219,22 @@ function mainFunction() {
 
         if (object.type === "message" && object.user !== "null") {
             //add the message to the division "message center"
-            addToMessageCenter.innerHTML = user + ": " + message;
-            addTimeToMessageCenter.innerHTML = time;
+            messageParagraph.innerHTML = user + ": " + message;
+            timeParagraph.innerHTML = time;
+
+            //styling for the message center
+            addToMessageCenter.style.display = "flex";
+            addToMessageCenter.style.justifyContent = "space-between";
+            addToMessageCenter.style.alignItems = "center";
+            timeParagraph.style.marginLeft = "20px";
+            timeParagraph.style.fontSize = "10px";
+
+            //add paragraph and time stamp to the message center
+            addToMessageCenter.appendChild(messageParagraph);
+            addToMessageCenter.appendChild(timeParagraph);
+
+            //append to message center
             messageCenter.appendChild(addToMessageCenter);
-            messageCenter.appendChild(addTimeToMessageCenter);
         }
 
         if (object.type === "leave") {
